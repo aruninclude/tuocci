@@ -50,9 +50,10 @@
     
     <properties>
         <tuocci.java.version>1.6</tuocci.java.version>
-        <junit.version>4.10</junit.version>
+        <testng.version>6.5.2</testng.version>
         <slfj.version>1.6.4</slfj.version>
         <tuocci.cxf.version>2.4.1</tuocci.cxf.version>
+		<surefire.version>2.12</surefire.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     
@@ -60,7 +61,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.6.4</version>
+            <version>${slfj.version}</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
@@ -70,7 +71,7 @@
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>6.5.2</version>
+            <version>${testng.version}</version>
         </dependency>
     </dependencies>
 
@@ -78,6 +79,7 @@
         <module>core</module>
         <module>http</module>
         <module>infrastructure</module>
+        <module>distribution</module>
     </modules>
 
     <!-- Build Settings -->
@@ -98,6 +100,11 @@
                     <artifactId>maven-site-plugin</artifactId>
                     <version>3.0-beta-2</version>
                 </plugin>
+   				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+    				<artifactId>maven-surefire-plugin</artifactId>
+   					<version>${surefire.version}</version>
+				</plugin>
             </plugins>
         </pluginManagement>
     </build>
