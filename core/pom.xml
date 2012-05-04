@@ -28,12 +28,14 @@
     <!-- The Basics -->
     <groupId>de.irf.it</groupId>
     <artifactId>tuocci-core</artifactId>
-    <version>0.2</version>
+    
+    <parent>
+        <groupId>de.irf.it.tuocci</groupId>
+        <artifactId>tuocci</artifactId>
+        <version>0.4</version>
+    </parent>
+    
     <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
@@ -44,29 +46,11 @@
             <artifactId>commons-configuration</artifactId>
             <version>1.6</version>
         </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.6.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.0.1</version>
-        </dependency>
     </dependencies>
-    <parent>
-        <groupId>de.irf.it.tuocci</groupId>
-        <artifactId>tuocci</artifactId>
-        <version>0.3.1</version>
-    </parent>
+    
     <!-- Build Settings -->
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
@@ -114,8 +98,5 @@
             </roles>
         </developer>
     </developers>
-
-    <!-- Environment Settings -->
-    <!-- <profiles>...</profiles> -->
 
 </project>

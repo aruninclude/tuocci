@@ -27,7 +27,7 @@ import de.irf.it.tuocci.core.annotations.Kind;
  * A <code>Link</code> indicates that one <code>resource</code> instance is
  * connected to another. Either its source or target may refer to an item not
  * within the owning service provider's domain.
- *
+ * 
  * @author <a href="mailto:alexander.papaspyrou@tu-dortmund.de">Alexander
  *         Papaspyrou</a>
  * @version $Id$
@@ -39,70 +39,70 @@ import de.irf.it.tuocci.core.annotations.Kind;
  */
 @Category(term = "link", scheme = "http://schemas.ogf.org/occi/core#", title = "Link")
 @Kind
-public class Link
-        extends Entity {
+public abstract class Link extends Entity {
 
-    /**
-     * The {@link Resource} instance this <code>Link</code> originates from.
-     */
-    @Attribute(name = "occi.core.source", required = true)
-    private Resource source;
+	/**
+	 * The {@link Resource} instance this <code>Link</code> originates from.
+	 */
+	@Attribute(name = "occi.core.source", required = true)
+	private Resource source;
 
-    /**
-     * The {@link Resource} instance this <code>Link</code> points to.
-     */
-    @Attribute(name = "occi.core.target", required = true)
-    private Resource target;
+	/**
+	 * The {@link Resource} instance this <code>Link</code> points to.
+	 */
+	@Attribute(name = "occi.core.target", required = true)
+	private Resource target;
 
-    /**
-     * Creates a new instance of this class, using the given parameters.
-     *
-     * @param source
-     *         The {@link Resource} instance this <code>Link</code> originates
-     *         from.
-     * @param target
-     *         The {@link Resource} instance this <code>Link</code> points to.
-     */
-    public Link(Resource source, Resource target) {
-        this.source = source;
-        this.target = target;
-    }
+	/**
+	 * Creates a new instance of this class, using the given parameters.
+	 * 
+	 * @param source
+	 *            The {@link Resource} instance this <code>Link</code>
+	 *            originates from.
+	 * @param target
+	 *            The {@link Resource} instance this <code>Link</code> points
+	 *            to.
+	 */
+	public Link(Resource source, Resource target) {
+		this.source = source;
+		this.target = target;
+	}
 
-    /**
-     * Returns the resource this link originates from.
-     *
-     * @return The resource this link originates from.
-     */
-    public Resource getSource() {
-        return source;
-    }
+	/**
+	 * Returns the resource this link originates from.
+	 * 
+	 * @return The resource this link originates from.
+	 */
+	public Resource getSource() {
+		return source;
+	}
 
-    /**
-     * Modifies the resource this link originates from.
-     *
-     * @param source
-     *         The new value for the resource this link originates from.
-     */
-    public void setSource(Resource source) {
-        this.source = source;
-    }
+	/**
+	 * Modifies the resource this link originates from.
+	 * 
+	 * @param source
+	 *            The new value for the resource this link originates from.
+	 */
+	public void setSource(Resource source) {
+		this.source = source;
+	}
 
-    /**
-     * Returns the resource this link points to.
-     *
-     * @return The resource this link points to.
-     */
-    public Resource getTarget() {
-        return target;
-    }
+	/**
+	 * Returns the resource this link points to.
+	 * 
+	 * @return The resource this link points to.
+	 */
+	public Resource getTarget() {
+		return target;
+	}
 
-    /**
-     * Modifies the resource this link points to.
-     *
-     * @param target
-     *         The new value for the resource this link points to.
-     */
-    public void setTarget(Resource target) {
-        this.target = target;
-    }
+	/**
+	 * Modifies the resource this link points to.
+	 * 
+	 * @param target
+	 *            The new value for the resource this link points to.
+	 */
+	public void setTarget(Resource target) {
+		this.target = target;
+	}
 }

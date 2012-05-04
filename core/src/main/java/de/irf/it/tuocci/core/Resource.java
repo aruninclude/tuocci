@@ -17,11 +17,11 @@
 
 package de.irf.it.tuocci.core;
 
+import java.util.Set;
+
 import de.irf.it.tuocci.core.annotations.Attribute;
 import de.irf.it.tuocci.core.annotations.Category;
 import de.irf.it.tuocci.core.annotations.Kind;
-
-import java.util.Set;
 
 /**
  * Describes a concrete resource in the OCCI Core Model.
@@ -32,7 +32,7 @@ import java.util.Set;
  * <p/>
  * It also exposes means for building related groups of resources via
  * corresponding link objects, and mechanisms for their manipulation.
- *
+ * 
  * @author <a href="mailto:alexander.papaspyrou@tu-dortmund.de">Alexander
  *         Papaspyrou</a>
  * @version $Id$
@@ -44,55 +44,55 @@ import java.util.Set;
  */
 @Category(term = "resource", scheme = "http://schemas.ogf.org/occi/core#", title = "Resource")
 @Kind
-public class Resource
-        extends Entity {
+public abstract class Resource extends Entity {
 
-    /**
-     * A summarizing description of the Resource instance.
-     */
-    @Attribute(name = "occi.core.summary", required = false, mutable = true)
-    private String summary;
+	/**
+	 * A summarizing description of the Resource instance.
+	 */
+	@Attribute(name = "occi.core.summary", required = false, mutable = true)
+	private String summary;
 
-    /**
-     * A set of {@link Link} compositions.
-     */
-    private Set<Link> links;
+	/**
+	 * A set of {@link Link} compositions.
+	 */
+	private Set<Link> links;
 
-    /**
-     * Returns the summarizing description of this resource.
-     *
-     * @return The summarizing description of this resource.
-     */
-    public String getSummary() {
-        return summary;
-    }
+	/**
+	 * Returns the summarizing description of this resource.
+	 * 
+	 * @return The summarizing description of this resource.
+	 */
+	public String getSummary() {
+		return summary;
+	}
 
-    /**
-     * Modifies the summarizing description of this resource.
-     *
-     * @param summary
-     *         The new value for the summarizing description of this resource.
-     */
-    public void setSummary(String summary) {
-        this.summary = summary;
-    }
+	/**
+	 * Modifies the summarizing description of this resource.
+	 * 
+	 * @param summary
+	 *            The new value for the summarizing description of this
+	 *            resource.
+	 */
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
 
-    /**
-     * Returns a set of currently associated links for this resource.
-     *
-     * @return A set of currently associated links for this resource.
-     */
-    public Set<Link> getLinks() {
-        return links;
-    }
+	/**
+	 * Returns a set of currently associated links for this resource.
+	 * 
+	 * @return A set of currently associated links for this resource.
+	 */
+	public Set<Link> getLinks() {
+		return links;
+	}
 
-    /**
-     * Changes the set of currently associated links for this resource.
-     *
-     * @param links
-     *         The new set of currently associated links for this resource.
-     */
-    public void setLinks(Set<Link> links) {
-        this.links = links;
-    }
+	/**
+	 * Changes the set of currently associated links for this resource.
+	 * 
+	 * @param links
+	 *            The new set of currently associated links for this resource.
+	 */
+	public void setLinks(Set<Link> links) {
+		this.links = links;
+	}
 }

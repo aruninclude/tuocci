@@ -27,78 +27,77 @@ import de.irf.it.tuocci.core.annotations.Kind;
 
 /**
  * TODO: not yet commented.
- *
+ * 
  * @author <a href="mailto:alexander.papaspyrou@tu-dortmund.de>Alexander
  *         Papaspyrou</a>
  * @version $Revision$ (as of $Date$)
  */
 @Category(term = "storage", scheme = "http://schemas.ogf.org/occi/infrastructure#", title = "Storage Resource")
 @Kind
-public class Storage
-        extends Resource {
+public abstract class Storage extends Resource {
 
-    @Attribute(name = "occi.storage.size", mutable = true)
-    private Float size;
+	@Attribute(name = "occi.storage.size", mutable = true)
+	private Float size;
 
-    @Attribute(name = "occi.storage.state")
-    private State state;
+	@Attribute(name = "occi.storage.state")
+	private State state;
 
-    public Float getSize() {
-        return size;
-    }
+	public Float getSize() {
+		return size;
+	}
 
-    public void setSize(Float size) {
-        this.size = size;
-    }
+	public void setSize(Float size) {
+		this.size = size;
+	}
 
-    public State getState() {
-        return state;
-    }
+	public State getState() {
+		return state;
+	}
 
-    @Category(term = "online", scheme = "http://schemas.ogf.org/occi/infrastructure/storage/action#")
-    @Action()
-    public void online() {
+	@Category(term = "online", scheme = "http://schemas.ogf.org/occi/infrastructure/storage/action#")
+	@Action()
+	public void online() {
 
-    }
+	}
 
-    @Category(term = "offline", scheme = "http://schemas.ogf.org/occi/infrastructure/storage/action#")
-    @Action()
-    public void offline() {
+	@Category(term = "offline", scheme = "http://schemas.ogf.org/occi/infrastructure/storage/action#")
+	@Action()
+	public void offline() {
 
-    }
+	}
 
-    @Category(term = "backup", scheme = "http://schemas.ogf.org/occi/infrastructure/storage/action#")
-    @Action()
-    public void backup() {
+	@Category(term = "backup", scheme = "http://schemas.ogf.org/occi/infrastructure/storage/action#")
+	@Action()
+	public void backup() {
 
-    }
+	}
 
-    @Category(term = "snapshot", scheme = "http://schemas.ogf.org/occi/infrastructure/storage/action#")
-    @Action()
-    public void snapshot() {
+	@Category(term = "snapshot", scheme = "http://schemas.ogf.org/occi/infrastructure/storage/action#")
+	@Action()
+	public void snapshot() {
 
-    }
+	}
 
-    @Category(term = "resize", scheme = "http://schemas.ogf.org/occi/infrastructure/storage/action#")
-    @Action()
-    public void resize(@Attribute(name = "size") Float size) {
+	@Category(term = "resize", scheme = "http://schemas.ogf.org/occi/infrastructure/storage/action#")
+	@Action()
+	public void resize(@Attribute(name = "size") Float size) {
 
-    }
+	}
 
-    public enum State {
+	public enum State {
 
-        ONLINE(),
+		ONLINE(),
 
-        OFFLINE(),
+		OFFLINE(),
 
-        BACKUP(),
+		BACKUP(),
 
-        SNAPSHOT(),
+		SNAPSHOT(),
 
-        RESIZE(),
+		RESIZE(),
 
-        DEGRADED()
+		DEGRADED()
 
-    }
+	}
 
 }

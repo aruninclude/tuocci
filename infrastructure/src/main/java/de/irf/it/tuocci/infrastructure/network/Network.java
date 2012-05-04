@@ -28,43 +28,42 @@ import de.irf.it.tuocci.core.annotations.Kind;
 
 /**
  * TODO: not yet commented.
- *
+ * 
  * @author <a href="mailto:alexander.papaspyrou@tu-dortmund.de>Alexander
  *         Papaspyrou</a>
  * @version $Revision$ (as of $Date$)
  */
 @Category(term = "network", scheme = "http://schemas.ogf.org/occi/infrastructure#", title = "Network Resource")
 @Kind
-@Attaches(mixins = {IPNetwork.class})
-public class Network
-        extends Resource {
+@Attaches(mixins = { IPNetwork.class })
+public abstract class Network extends Resource {
 
-    @Attribute(name = "occi.network.vlan", required = false, mutable = true)
-    private Short vlan;
+	@Attribute(name = "occi.network.vlan", required = false, mutable = true)
+	private Short vlan;
 
-    @Attribute(name = "occi.network.label", required = false, mutable = true)
-    private String label;
+	@Attribute(name = "occi.network.label", required = false, mutable = true)
+	private String label;
 
-    @Attribute(name = "occi.network.state")
-    private State state;
+	@Attribute(name = "occi.network.state")
+	private State state;
 
-    @Category(term = "up", scheme = "http://schemas.ogf.org/occi/infrastructure/network/action#")
-    @Action()
-    public void up() {
+	@Category(term = "up", scheme = "http://schemas.ogf.org/occi/infrastructure/network/action#")
+	@Action()
+	public void up() {
 
-    }
+	}
 
-    @Category(term = "down", scheme = "http://schemas.ogf.org/occi/infrastructure/network/action#")
-    @Action()
-    public void down() {
+	@Category(term = "down", scheme = "http://schemas.ogf.org/occi/infrastructure/network/action#")
+	@Action()
+	public void down() {
 
-    }
+	}
 
-    public enum State {
+	public enum State {
 
-        ACTIVE(),
+		ACTIVE(),
 
-        INACTIVE()
+		INACTIVE()
 
-    }
+	}
 }

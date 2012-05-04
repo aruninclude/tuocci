@@ -28,51 +28,50 @@ import de.irf.it.tuocci.infrastructure.compute.Compute;
 
 /**
  * TODO: not yet commented.
- *
+ * 
  * @author <a href="mailto:alexander.papaspyrou@tu-dortmund.de>Alexander
  *         Papaspyrou</a>
  * @version $Revision$ (as of $Date$)
  */
 @Category(term = "networkinterface", scheme = "http://schemas.ogf.org/occi/infrastructure#", title = "NetworkInterface Link")
 @Kind
-@Attaches(mixins = {IPNetworkInterface.class})
-public class NetworkInterface
-        extends Link {
+@Attaches(mixins = { IPNetworkInterface.class })
+public abstract class NetworkInterface extends Link {
 
-    @Attribute(name = "occi.networkinterface.interface")
-    private String interfaceName;
+	@Attribute(name = "occi.networkinterface.interface")
+	private String interfaceName;
 
-    @Attribute(name = "occi.networkinterface.mac", mutable = true)
-    private String macAddress;
+	@Attribute(name = "occi.networkinterface.mac", mutable = true)
+	private String macAddress;
 
-    @Attribute(name = "occi.networkinterface.state")
-    private State state;
+	@Attribute(name = "occi.networkinterface.state")
+	private State state;
 
-    public NetworkInterface(Compute source, Network target) {
-        super(source, target);
-    }
+	public NetworkInterface(Compute source, Network target) {
+		super(source, target);
+	}
 
-    public String getInterfaceName() {
-        return interfaceName;
-    }
+	public String getInterfaceName() {
+		return interfaceName;
+	}
 
-    public String getMacAddress() {
-        return macAddress;
-    }
+	public String getMacAddress() {
+		return macAddress;
+	}
 
-    public void setMacAddress(String macAddress) {
-        this.macAddress = macAddress;
-    }
+	public void setMacAddress(String macAddress) {
+		this.macAddress = macAddress;
+	}
 
-    public State getState() {
-        return state;
-    }
+	public State getState() {
+		return state;
+	}
 
-    public enum State {
+	public enum State {
 
-        active(),
+		active(),
 
-        inactive()
+		inactive()
 
-    }
+	}
 }

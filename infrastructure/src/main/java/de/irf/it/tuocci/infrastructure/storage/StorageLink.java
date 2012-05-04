@@ -27,54 +27,53 @@ import de.irf.it.tuocci.infrastructure.compute.Compute;
 
 /**
  * TODO: not yet commented.
- *
+ * 
  * @author <a href="mailto:alexander.papaspyrou@tu-dortmund.de>Alexander
  *         Papaspyrou</a>
  * @version $Revision$ (as of $Date$)
  */
 @Category(term = "storagelink", scheme = "http://schemas.ogf.org/occi/infrastructure#", title = "StorageLink Link")
 @Kind
-public class StorageLink
-        extends Link {
+public abstract class StorageLink extends Link {
 
-    @Attribute(name = "occi.storagelink.deviceid", mutable = true)
-    private String deviceId;
+	@Attribute(name = "occi.storagelink.deviceid", mutable = true)
+	private String deviceId;
 
-    @Attribute(name = "occi.storagelink.mountpoint", required = false, mutable = true)
-    private String macAddress;
+	@Attribute(name = "occi.storagelink.mountpoint", required = false, mutable = true)
+	private String macAddress;
 
-    @Attribute(name = "occi.networkinterface.state")
-    private State state;
+	@Attribute(name = "occi.networkinterface.state")
+	private State state;
 
-    public StorageLink(Compute source, Storage target) {
-        super(source, target);
-    }
+	public StorageLink(Compute source, Storage target) {
+		super(source, target);
+	}
 
-    public String getDeviceId() {
-        return deviceId;
-    }
+	public String getDeviceId() {
+		return deviceId;
+	}
 
-    public void setDeviceId(String deviceId) {
-        this.deviceId = deviceId;
-    }
+	public void setDeviceId(String deviceId) {
+		this.deviceId = deviceId;
+	}
 
-    public String getMacAddress() {
-        return macAddress;
-    }
+	public String getMacAddress() {
+		return macAddress;
+	}
 
-    public void setMacAddress(String macAddress) {
-        this.macAddress = macAddress;
-    }
+	public void setMacAddress(String macAddress) {
+		this.macAddress = macAddress;
+	}
 
-    public State getState() {
-        return state;
-    }
+	public State getState() {
+		return state;
+	}
 
-    public enum State {
+	public enum State {
 
-        active(),
+		active(),
 
-        inactive()
+		inactive()
 
-    }
+	}
 }
