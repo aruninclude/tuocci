@@ -9,7 +9,7 @@
 		<relativePath>../pom.xml</relativePath>
 	</parent>
 	
-	<groupId>de.irf.it.tuocci</groupId>
+	<groupId>de.irf.it</groupId>
 	<artifactId>tuocci-distribution</artifactId>
 	<name>Distribution</name>
 
