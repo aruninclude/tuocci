@@ -70,19 +70,20 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>de.irf.it.tuocci</groupId>
+			<groupId>de.irf.it</groupId>
 			<artifactId>tuocci-core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>de.irf.it.tuocci</groupId>
+			<groupId>de.irf.it</groupId>
 			<artifactId>tuocci-infrastructure</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>de.irf.it.tuocci</groupId>
-			<artifactId>tuocci-http</artifactId>
+			<groupId>de.irf.it</groupId>
+			<artifactId>tuocci-httpng</artifactId>
 			<version>${project.version}</version>
+			<type>war</type>
 		</dependency>
 	</dependencies>
 </project>
