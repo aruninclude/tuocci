@@ -15,6 +15,23 @@
  *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*
+ * This file is part of tuOCCI.
+ *
+ *     tuOCCI is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU Lesser General Public License as
+ *     published by the Free Software Foundation, either version 3 of
+ *     the License, or (at your option) any later version.
+ *
+ *     tuOCCI is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU Lesser General Public License for more details.
+ *
+ *     You should have received a copy of the GNU Lesser General Public
+ *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package de.irf.it.tuocci.core;
 
 import de.irf.it.tuocci.core.annotations.Action;
@@ -78,7 +95,8 @@ import java.util.UUID;
  */
 @Category(term = "entity", scheme = "http://schemas.ogf.org/occi/core#", title = "Entity type")
 @Kind
-public abstract class Entity implements Queryable {
+public abstract class Entity
+        implements Queryable {
 
     /**
      * A unique identifier (within the service provider's namespace) of this
@@ -498,7 +516,7 @@ public abstract class Entity implements Queryable {
      *         if the requested attribute cannot be found on this entity or any
      *         attached mixin, or underlying manipulation failed.
      */
-    public final void setAttribute(String name, String value)
+    public final void setAttributeValue(String name, String value)
             throws AttributeAccessException {
         Method setter = null;
         Object target = null;
