@@ -95,6 +95,7 @@ import java.util.UUID;
  */
 @Category(term = "entity", scheme = "http://schemas.ogf.org/occi/core#", title = "Entity type")
 @Kind
+@Attaches(mixins = {Tag.class})
 public abstract class Entity
         implements Queryable {
 
@@ -220,7 +221,7 @@ public abstract class Entity
         /*
          * Check whether the examined object is annotated properly.
          */
-        if (o.getClass().isAnnotationPresent(Mixin.class) && o.getClass().isAnnotationPresent(Category.class)) {
+        if (o.getClass().isAnnotationPresent(Mixin.class)) {
             /*
              * yes: Check whether the provided mixin is supported by this resource type.
              */
@@ -228,8 +229,25 @@ public abstract class Entity
                 /*
                  * yes: Add to list of attached mixins and notify subclasses.
                  */
-                Category c = o.getClass().getAnnotation(Category.class);
-                this.mixins.put(c.scheme() + c.term(), o);
+                String key = null;
+                if (o instanceof Tag) {
+                    Tag t = (Tag) o;
+                    key = new StringBuilder().append(t.getScheme()).append(t.getTerm()).toString();
+                }
+                else {
+                    if (o.getClass().isAnnotationPresent(Category.class)) {
+                        Category c = o.getClass().getAnnotation(Category.class);
+                        key = new StringBuilder().append(c.scheme()).append(c.term()).toString();
+                    }
+                    else {
+                        String message = new StringBuilder("mixin not usable: '@Category' annotation missing on \"")
+                                .append(o.getClass().getName())
+                                .append("\".")
+                                .toString();
+                        throw new InvalidMixinException(message);
+                    }
+                }
+                this.mixins.put(key, o);
             } // if
             else {
                 /*
@@ -249,7 +267,7 @@ public abstract class Entity
             /*
              * no: throw an exception denoting that the provided object is no mixin.
              */
-            String message = new StringBuilder("not a mixin: '@Category' or '@Mixin' annotations missing on \"")
+            String message = new StringBuilder("not a mixin: '@Mixin' annotations missing on \"")
                     .append(o.getClass().getName())
                     .append("\".")
                     .toString();
