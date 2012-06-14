@@ -47,11 +47,6 @@
             <artifactId>tuocci-infrastructure</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-bundle-jaxrs</artifactId>
-            <version>${tuocci.cxf.version}</version>
-        </dependency>
     </dependencies>
 
 

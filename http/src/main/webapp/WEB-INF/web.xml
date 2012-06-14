@@ -23,25 +23,6 @@
         "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
-    <context-param>
-        <param-name>contextConfigLocation</param-name>
-        <param-value>WEB-INF/spring/beans.xml</param-value>
-    </context-param>
-
-    <listener>
-        <listener-class>
-            org.springframework.web.context.ContextLoaderListener
-        </listener-class>
-    </listener>
-
-    <servlet>
-        <servlet-name>tuOcciServlet</servlet-name>
-        <display-name>tuOCCI Open Cloud Computing Interface Servlet</display-name>
-        <servlet-class>
-            org.apache.cxf.transport.servlet.CXFServlet
-        </servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
 
     <servlet>
         <servlet-name>tuOcciQueryInterfaceServlet</servlet-name>
@@ -57,11 +38,6 @@
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>tuOcciServlet</servlet-name>
-        <url-pattern>/tuocci/*</url-pattern>
-    </servlet-mapping>
-
-    <servlet-mapping>
         <servlet-name>tuOcciQueryInterfaceServlet</servlet-name>
         <url-pattern>/-/*</url-pattern>
     </servlet-mapping>
@@ -73,4 +49,5 @@
         <servlet-name>tuOcciResourceNamspaceServlet</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
+    
 </web-app>
