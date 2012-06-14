@@ -43,8 +43,34 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
+    <servlet>
+        <servlet-name>tuOcciQueryInterfaceServlet</servlet-name>
+        <display-name>tuOCCI Open Cloud Computing Interface Servlet (Query Interface)</display-name>
+        <servlet-class>de.irf.it.tuocci.httpng.QueryInterfaceServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>tuOcciResourceNamspaceServlet</servlet-name>
+        <display-name>tuOCCI Open Cloud Computing Interface Servlet (Resource Namespace)</display-name>
+        <servlet-class>de.irf.it.tuocci.httpng.ResourceNamespaceServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>tuOcciServlet</servlet-name>
-        <url-pattern>/tuocci</url-pattern>
+        <url-pattern>/tuocci/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>tuOcciQueryInterfaceServlet</servlet-name>
+        <url-pattern>/-/*</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>tuOcciQueryInterfaceServlet</servlet-name>
+        <url-pattern>/.well-known/org/ogf/occi/-/</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>tuOcciResourceNamspaceServlet</servlet-name>
+        <url-pattern>/*</url-pattern>
     </servlet-mapping>
 </web-app>
