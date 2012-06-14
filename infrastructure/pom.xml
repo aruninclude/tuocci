@@ -16,6 +16,8 @@
   ~     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
+<!-- $Id$ -->
+
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -23,8 +25,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!-- The Basics -->
-    <groupId>de.irf.it</groupId>
+    <groupId>de.irf.it.tuocci</groupId>
     <artifactId>tuocci-infrastructure</artifactId>
+    <version>0.4</version>
     
     <parent>
         <groupId>de.irf.it.tuocci</groupId>
@@ -34,14 +37,11 @@
 
     <dependencies>
         <dependency>
-            <groupId>de.irf.it</groupId>
+            <groupId>de.irf.it.tuocci</groupId>
             <artifactId>tuocci-core</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
-    
-    <dependencyManagement></dependencyManagement>
-    <modules></modules>
 
     <!-- Build Settings -->
     <build>
@@ -61,27 +61,9 @@
             </plugin>
         </plugins>
     </build>
-    <reporting></reporting>
 
     <!-- More Project Information -->
     <name>tuOCCI Infrastructure Model Implementation</name>
     <description>...</description>
-    <inceptionYear>2011</inceptionYear>
-    <developers>
-        <developer>
-            <id>smalpapa</id>
-            <name>Alexander Papaspyrou</name>
-            <email>alexander.papaspyrou@tu-dortmund.de</email>
-            <organization>TU Dortmund University</organization>
-            <organizationUrl>http://www.tu-dortmund.de</organizationUrl>
-            <roles>
-                <role>Module Sheperd</role>
-                <role>Developer</role>
-            </roles>
-        </developer>
-    </developers>
-
-    <!-- Environment Settings -->
-    <profiles></profiles>
 
 </project>

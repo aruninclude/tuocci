@@ -17,23 +17,6 @@
   ~     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<!--
-  ~ This file is part of tuOCCI.
-  ~
-  ~     tuOCCI is free software: you can redistribute it and/or modify
-  ~     it under the terms of the GNU Lesser General Public License as
-  ~     published by the Free Software Foundation, either version 3 of
-  ~     the License, or (at your option) any later version.
-  ~
-  ~     tuOCCI is distributed in the hope that it will be useful,
-  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
-  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  ~     GNU Lesser General Public License for more details.
-  ~
-  ~     You should have received a copy of the GNU Lesser General Public
-  ~     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
-  -->
-
 <!-- $Id$ -->
 
 <project xmlns="http://maven.apache.org/POM/4.0.0"
@@ -50,36 +33,18 @@
 
     <properties>
         <tuocci.java.version>1.6</tuocci.java.version>
-        <testng.version>6.5.2</testng.version>
-        <slfj.version>1.6.4</slfj.version>
         <tuocci.cxf.version>2.4.1</tuocci.cxf.version>
-		<surefire.version>2.12</surefire.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     
     <dependencies>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>${slfj.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-jcl</artifactId>
-            <version>1.6.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>${testng.version}</version>
-        </dependency>
     </dependencies>
 
     <modules>
         <module>core</module>
         <module>http</module>
         <module>infrastructure</module>
-        <module>distribution</module>
+        <!--module>distribution</module-->
     </modules>
 
     <!-- Build Settings -->
@@ -100,18 +65,18 @@
                     <artifactId>maven-site-plugin</artifactId>
                     <version>3.0-beta-2</version>
                 </plugin>
-   				<plugin>
+   				<!--plugin>
 					<groupId>org.apache.maven.plugins</groupId>
     				<artifactId>maven-surefire-plugin</artifactId>
    					<version>${surefire.version}</version>
-				</plugin>
+				</plugin-->
             </plugins>
         </pluginManagement>
     </build>
 
     <!-- More Project Information -->
     <name>tuOCCI Open Cloud Computing Interface Framework</name>
-    <description>...</description>
+    <description>The tuOCCI Open Cloud Computing Interface Framework is a 100% Java™ implementation of the Open Cloud Computing Interface (OCCI) family of specifications. More specifically, it provides a full implementation of the OCCI Core (GFD.183), OCCI Infrastructure (GFD.184), and OCCI RESTful HTTP Rendering (GFD.185) specifications, and passes the doyouspeakOCCI compliance tests.</description>
     <url>http://irf.github.com/tuocci</url>
     <inceptionYear>2011</inceptionYear>
     <licenses>
@@ -127,31 +92,33 @@
     </organization>
     <developers>
         <developer>
-            <id>smsnheck</id>
-            <name>Sebastian Heckmann</name>
-            <roles>
-                <role>Release Manager</role>
-            </roles>
-        </developer>
-        <developer>
-            <id>sebastianlaag</id>
-            <name>Sebastian Laag</name>
-            <roles>
-                <role>Packager</role>
-            </roles>
-        </developer>
-        <developer>
             <id>lxndrp</id>
             <name>Alexander Papaspyrou</name>
             <email>alexander.papaspyrou@tu-dortmund.de</email>
             <roles>
                 <role>Project Manager</role>
+                <role>Developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>mrtg</id>
+            <name>Tassilo Galonstka</name>
+            <email>tassilo.galonska@tu-dortmund.de</email>
+            <roles>
+                <role>Maintainer</role>
+                <role>Developer</role>
             </roles>
         </developer>
     </developers>
     <contributors>
         <contributor>
+            <name>Sebastian Heckmann</name>
+        </contributor>
+        <contributor>
             <name>Sebastian Herbermann</name>
+        </contributor>
+        <contributor>
+            <name>Sebastian Laag</name>
         </contributor>
     </contributors>
 
