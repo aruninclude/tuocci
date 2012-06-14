@@ -33,11 +33,6 @@
             org.springframework.web.context.ContextLoaderListener
         </listener-class>
     </listener>
-    <listener>
-        <listener-class>
-            com.sun.xml.ws.transport.http.servlet.WSServletContextListener
-        </listener-class>
-    </listener>
 
     <servlet>
         <servlet-name>tuOcciServlet</servlet-name>
@@ -47,21 +42,9 @@
         </servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    <servlet>
-        <servlet-name>WSServlet</servlet-name>
-        <display-name>WSServlet</display-name>
-        <description>JAX-WS endpoint</description>
-        <servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet
-        </servlet-class>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
 
     <servlet-mapping>
         <servlet-name>tuOcciServlet</servlet-name>
         <url-pattern>/tuocci</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>WSServlet</servlet-name>
-        <url-pattern>/services/*</url-pattern>
     </servlet-mapping>
 </web-app>
