@@ -19,12 +19,15 @@
 
 package de.irf.it.tuocci.httpng;
 
+import de.irf.it.tuocci.httpng.resources.Collection;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Map;
 
 /**
  * TODO: not yet commented.
@@ -36,6 +39,10 @@ import java.io.PrintWriter;
 public class ResourceNamespaceServlet
         extends HttpServlet {
 
+    private Map<String, Collection> pathToCollectionMap;
+
+    private Map<String, Entity> pathToEntityMap;
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
@@ -43,11 +50,29 @@ public class ResourceNamespaceServlet
     }
 
     @Override
-    public void doGet(HttpServletRequest req, HttpServletResponse resp)
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         if(req.getPathInfo().endsWith("/")){
             // handle collection resource
-            
+
+            // TODO: implement filtering
+
+            // TODO: locate collection for requested location
+
+            // TODO: return results, depending on requested MIME type.
+            MediaType mt = MediaType.parseFrom(req.getHeader("Accept"));
+            switch (mt) {
+                case TEXT_URILIST:
+
+                    break;
+                case TEXT_PLAIN:
+                    break;
+                case TEXT_OCCI:
+                    break;
+                default:
+                    // TODO: decide on default
+            }
+
         }
         else {
             // handle entity resource
