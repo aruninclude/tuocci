@@ -18,7 +18,6 @@
 package de.irf.it.tuocci.httpng;
 
 import de.irf.it.tuocci.core.Entity;
-import de.irf.it.tuocci.core.annotations.Category;
 
 /**
  * TODO: not yet commented.
@@ -29,31 +28,46 @@ import de.irf.it.tuocci.core.annotations.Category;
  */
 public enum MediaType {
 
-    TEXT_URILIST("text/uri-list") {
+    APPLICATION_JSON("application/json") {
         @Override
-        public String renderEntity(Entity entity) {
+        public String renderEntities(Entity... entities) {
             return null;  //To change body of implemented methods use File | Settings | File Templates.
         }
     },
 
-    TEXT_PLAIN("text/plain") {
+    STAR_STAR("*/*") {
         @Override
-        public String renderEntity(Entity entity) {
+        public String renderEntities(Entity... entities) {
             return null;  //To change body of implemented methods use File | Settings | File Templates.
         }
     },
 
     TEXT_OCCI("text/occi") {
         @Override
-        public String renderEntity(Entity entity) {
+        public String renderEntities(Entity... entities) {
             return null;  //To change body of implemented methods use File | Settings | File Templates.
         }
     },
 
-    APPLICATION_JSON("application/json") {
+    TEXT_PLAIN("text/plain") {
         @Override
-        public String renderEntity(Entity entity) {
+        public String renderEntities(Entity... entities) {
             return null;  //To change body of implemented methods use File | Settings | File Templates.
+        }
+    },
+
+    TEXT_URILIST("text/uri-list") {
+        @Override
+        public String renderEntities(Entity... entities) {
+            return null;  //To change body of implemented methods use File | Settings | File Templates.
+        }
+    },
+
+    UNSUPPORTED("unsupported") {
+        @Override
+        public String renderEntities(Entity... entities) {
+            String msg = "This media type is unsupported.";
+            throw new UnsupportedOperationException(msg);
         }
     };
 
@@ -64,7 +78,7 @@ public enum MediaType {
     }
 
     public static MediaType parseFrom(String name) {
-        MediaType result = null;
+        MediaType result = UNSUPPORTED;
         for (MediaType value : MediaType.values()) {
             if (name.equals(value.name)) {
                 result = value;
@@ -74,6 +88,6 @@ public enum MediaType {
         return result;
     }
 
-    abstract public String renderEntity(Entity entity);
+    abstract public String renderEntities(Entity... entities);
 
 }
