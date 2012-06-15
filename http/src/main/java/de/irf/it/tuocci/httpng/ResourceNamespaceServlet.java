@@ -37,12 +37,37 @@ public class ResourceNamespaceServlet
         extends HttpServlet {
 
     @Override
-    public void doGet(HttpServletRequest request,
-                      HttpServletResponse response)
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        out.println("tuOcci ResourceNamespaceServlet Executed on Path " + request.getRequestURI());
+        super.doPost(req, resp);    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        if(req.getPathInfo().endsWith("/")){
+            // handle collection resource
+            
+        }
+        else {
+            // handle entity resource
+        }
+        PrintWriter out = resp.getWriter();
+        out.println("tuOcci ResourceNamespaceServlet Executed (Path: " + req.getPathInfo() + ")");
         out.flush();
         out.close();
     }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        super.doPut(req, resp);    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        super.doDelete(req, resp);    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
 }

@@ -33,15 +33,34 @@ import java.io.PrintWriter;
  *         Papaspyrou</a>
  * @version $Revision$ (as of $Date$)
  */
-public class QueryInterfaceServlet extends HttpServlet {
+public class QueryInterfaceServlet
+        extends HttpServlet {
 
     @Override
-    public void doGet(HttpServletRequest request,
-                      HttpServletResponse response)
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        out.println( "tuOcci QueryInterfaceServlet Executed" );
+        super.doPost(req, resp);    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    @Override
+    public void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        PrintWriter out = resp.getWriter();
+        out.println("tuOcci QueryInterfaceServlet Executed");
         out.flush();
         out.close();
     }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        super.doPut(req, resp);    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        super.doDelete(req, resp);    //To change body of overridden methods use File | Settings | File Templates.
+    }
+
 }
