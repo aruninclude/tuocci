@@ -44,7 +44,7 @@ import de.irf.it.tuocci.core.exceptions.ActionTriggerException;
 import de.irf.it.tuocci.core.exceptions.AttributeAccessException;
 import de.irf.it.tuocci.core.exceptions.InvalidMixinException;
 import de.irf.it.tuocci.core.exceptions.UnsupportedMixinException;
-import de.irf.it.tuocci.core.interfaces.Queryable;
+import de.irf.it.tuocci.core.model.Tag;
 
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
@@ -96,8 +96,7 @@ import java.util.UUID;
 @Category(term = "entity", scheme = "http://schemas.ogf.org/occi/core#", title = "Entity type")
 @Kind
 @Attaches(mixins = {Tag.class})
-public abstract class Entity
-        implements Queryable {
+public abstract class Entity {
 
     /**
      * A unique identifier (within the service provider's namespace) of this
