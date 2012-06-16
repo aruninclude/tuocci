@@ -19,12 +19,11 @@
 
 package de.irf.it.tuocci.httpng.mime.text;
 
-import de.irf.it.tuocci.core.Entity;
-import de.irf.it.tuocci.core.Link;
-import de.irf.it.tuocci.core.annotations.Attribute;
-import de.irf.it.tuocci.core.annotations.Category;
-import de.irf.it.tuocci.core.exceptions.AttributeAccessException;
-import de.irf.it.tuocci.httpng.LocationResolver;
+import de.irf.it.tuocci.core.api.Entity;
+import de.irf.it.tuocci.core.api.Link;
+import de.irf.it.tuocci.core.api.annotations.Attribute;
+import de.irf.it.tuocci.core.api.annotations.Category;
+import de.irf.it.tuocci.core.api.exceptions.AttributeAccessException;
 
 /**
  * TODO: not yet commented.
@@ -34,16 +33,6 @@ import de.irf.it.tuocci.httpng.LocationResolver;
  * @version $Revision$ (as of $Date$)
  */
 public abstract class AbstractTextRenderer {
-
-    private LocationResolver locationResolver;
-
-    public void setLocationResolver(LocationResolver locationResolver) {
-        this.locationResolver = locationResolver;
-    }
-
-    public LocationResolver getLocationResolver() {
-        return locationResolver;
-    }
 
     public String renderCategory(Category c) {
         StringBuffer result = new StringBuffer();
@@ -71,7 +60,7 @@ public abstract class AbstractTextRenderer {
         StringBuffer result = new StringBuffer();
 
         result.append("Link: ");
-        result.append("<").append(locationResolver.getTargetLocation(l)).append(">");
+        //result.append("<").append(locationResolver.getTargetLocation(l)).append(">");
         result.append(";\n");
 
         result.append("\trel = ");

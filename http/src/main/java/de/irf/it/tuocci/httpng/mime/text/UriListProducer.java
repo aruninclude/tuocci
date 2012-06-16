@@ -14,7 +14,6 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.net.URI;
-import java.net.URL;
 import java.util.List;
 
 /**

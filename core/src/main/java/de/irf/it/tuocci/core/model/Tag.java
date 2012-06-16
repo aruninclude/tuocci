@@ -19,7 +19,7 @@
 
 package de.irf.it.tuocci.core.model;
 
-import de.irf.it.tuocci.core.annotations.Mixin;
+import de.irf.it.tuocci.core.api.annotations.Mixin;
 
 /**
  * TODO: not yet commented.

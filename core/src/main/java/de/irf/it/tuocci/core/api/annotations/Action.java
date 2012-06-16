@@ -15,7 +15,7 @@
  *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.irf.it.tuocci.core.annotations;
+package de.irf.it.tuocci.core.api.annotations;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -26,7 +26,7 @@ import java.lang.annotation.Target;
 
 /**
  * Denotes an invocable operation applicable to an {@link
- * de.irf.it.tuocci.core.Entity} sub-class instance.
+ * de.irf.it.tuocci.core.api.Entity} sub-class instance.
  * <p/>
  * The <code>Action</code> annotation indicates for a method on a class that it
  * should be exposed via OCCI as an operation that can be invoked by a
@@ -36,7 +36,7 @@ import java.lang.annotation.Target;
  * arbitrary class, provided that this class is annotated as {@link
  * Kind} or {@link Mixin}. In addition to that, it is <b>recommended</b> for
  * the former that the class in question inherits from {@link
- * de.irf.it.tuocci.core.Entity} to ensure full OCCI Core Model compliance.
+ * de.irf.it.tuocci.core.api.Entity} to ensure full OCCI Core Model compliance.
  * </p>
  * Since <code>Action</code>s in the OCCI Core Model require their own type,
  * this annotation <b>must</b> be used in conjunction with the {@link Category}

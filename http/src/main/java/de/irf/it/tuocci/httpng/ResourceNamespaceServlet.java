@@ -21,6 +21,8 @@ package de.irf.it.tuocci.httpng;
 
 //import de.irf.it.tuocci.httpng.resources.Collection;
 
+import de.irf.it.tuocci.httpng.mime.MediaType;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

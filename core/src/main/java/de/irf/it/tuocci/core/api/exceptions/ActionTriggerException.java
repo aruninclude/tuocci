@@ -15,26 +15,44 @@
  *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.irf.it.tuocci.core.exceptions;
+package de.irf.it.tuocci.core.api.exceptions;
 
 /**
- * Thrown when an object is provided as {@link
- * de.irf.it.tuocci.core.annotations.Mixin}, but has incomplete or invalid
- * annotations.
+ * Thrown when an {@link de.irf.it.tuocci.core.api.annotations.Action} cannot be
+ * properly invoked. Possible reasons include
+ * <ul>
+ * <li>the action being not present on the Entity at all,</li>
+ * <li>
+ * the invocation of an action having failed (because of
+ * provided parameters being invalid, out of range, wrong type,
+ * or not acceptable, or some operational failure in the underlying
+ * method),
+ * </li>
+ * <li>
+ * one or more of the provided arguments not matching the "action
+ * signature" or not properly being converted to the corresponding
+ * parameter type of the method, or
+ * </li>
+ * <li>
+ * the method carrying the action not being exposed properly (i.e.
+ * not being public and instance-based).
+ * </li>
+ * </ul>
  *
  * @author <a href="mailto:alexander.papaspyrou@tu-dortmund.de>Alexander
  *         Papaspyrou</a>
  * @version $Id$
- * @see de.irf.it.tuocci.core.annotations
+ * @see de.irf.it.tuocci.core.api.annotations.Attribute
+ * @see de.irf.it.tuocci.core.api.annotations
  * @since 0.3 ("gordons")
  */
-public class InvalidMixinException
+public class ActionTriggerException
         extends Exception {
 
     /**
      * Creates a new instance of this class.
      */
-    public InvalidMixinException() {
+    public ActionTriggerException() {
         super();
     }
 
@@ -45,7 +63,7 @@ public class InvalidMixinException
      *         An error message describing the reason for this
      *         exception being thrown.
      */
-    public InvalidMixinException(String message) {
+    public ActionTriggerException(String message) {
         super(message);
     }
 
@@ -56,7 +74,7 @@ public class InvalidMixinException
      *         The originating error that was the cause for this
      *         exception.
      */
-    public InvalidMixinException(Throwable cause) {
+    public ActionTriggerException(Throwable cause) {
         super(cause);
     }
 
@@ -70,7 +88,7 @@ public class InvalidMixinException
      *         The originating error that was the cause for this
      *         exception.
      */
-    public InvalidMixinException(String message, Throwable cause) {
+    public ActionTriggerException(String message, Throwable cause) {
         super(message, cause);
     }
 

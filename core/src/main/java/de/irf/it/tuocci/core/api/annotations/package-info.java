@@ -32,21 +32,21 @@
  *
  * <ul>
  *     <li>
- *         the {@link de.irf.it.tuocci.core.annotations.Category} it
+ *         the {@link de.irf.it.tuocci.core.api.annotations.Category} it
  *         represents, used to classify the resource towards OCCI clients;
  *     </li>
  *     <li>
- *         the class of the resource, being either {@link de.irf.it.tuocci.core.annotations.Kind}
- *         or {@link de.irf.it.tuocci.core.annotations.Mixin}; and
+ *         the class of the resource, being either {@link de.irf.it.tuocci.core.api.annotations.Kind}
+ *         or {@link de.irf.it.tuocci.core.api.annotations.Mixin}; and
  *     </li>
  *     <li>
- *         the {@link de.irf.it.tuocci.core.annotations.Attribute}s and
- *         {@link de.irf.it.tuocci.core.annotations.Action}s it supports.
+ *         the {@link de.irf.it.tuocci.core.api.annotations.Attribute}s and
+ *         {@link de.irf.it.tuocci.core.api.annotations.Action}s it supports.
  *     </li>
  * </ul>
  *
  * Besides this, it allows arbitrary types declared as a <code>Kind</code> to
- * indicate via the {@link de.irf.it.tuocci.core.annotations.Attaches} whether
+ * indicate via the {@link de.irf.it.tuocci.core.api.annotations.Attaches} whether
  * they support certain Mixins.
  * <p/>
  * Consumers of these annotations are expected to walk through the type
@@ -67,4 +67,4 @@
  * Recommendation, GFD-P-R.183, April 2011."
  *
  */
-package de.irf.it.tuocci.core.annotations;
+package de.irf.it.tuocci.core.api.annotations;

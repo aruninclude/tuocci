@@ -15,7 +15,7 @@
  *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.irf.it.tuocci.core.annotations;
+package de.irf.it.tuocci.core.api.annotations;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -56,7 +56,7 @@ import java.lang.annotation.Target;
  * @author <a href="mailto:alexander.papaspyrou@tu-dortmund.de">Alexander
  *         Papaspyrou</a>
  * @version $Id$
- * @see de.irf.it.tuocci.core.Entity
+ * @see de.irf.it.tuocci.core.api.Entity
  * @see "Ralf Nyrén, Andy Edmonds, Alexander Papaspyrou, and Thijs Metsch, <a
  *      href="http://ogf.org/documents/GFD.183.pdf">Open Cloud Computing
  *      Interface &ndash; Core</a>, Open Grid Forum Proposed Recommendation,
@@ -80,7 +80,7 @@ public @interface Attribute {
      * Indicates whether this attribute is required to be set. If so, it must
      * be
      * assigned a value during the whole lifetime of the corresponding {@link
-     * de.irf.it.tuocci.core.Entity}.
+     * de.irf.it.tuocci.core.api.Entity}.
      * <p/>
      * By default, attributes are <em>required</em>.
      *
@@ -92,7 +92,7 @@ public @interface Attribute {
     /**
      * Indicates whether this attribute is mutable. If so, clients to the model
      * are allowed to modify its value after creation of the {@link
-     * de.irf.it.tuocci.core.Entity}.
+     * de.irf.it.tuocci.core.api.Entity}.
      * <p/>
      * By default, attributes are <em>immutable</em>.
      *

@@ -28,15 +28,15 @@
  *
  * <ul>
  *     <li>
- *         a {@link Resource}, representing a real-world
+ *         a {@link de.irf.it.tuocci.core.api.Resource}, representing a real-world
  *         "thing" that is modeled through the OCCI family of specifications;
  *     </li>
  *     <li>
- *         a {@link Link}, representing a bi-directional
+ *         a {@link de.irf.it.tuocci.core.api.Link}, representing a bi-directional
  *         connection between two resources; or
  *     </li>
  *     <li>
- *         any other class extending {@link Entity},
+ *         any other class extending {@link de.irf.it.tuocci.core.api.Entity},
  *         therefore defining new root elements in the OCCI type hierarchy.
  *     </li>
  * </ul>

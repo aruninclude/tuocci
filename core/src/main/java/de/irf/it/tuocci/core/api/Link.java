@@ -32,11 +32,11 @@
  *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.irf.it.tuocci.core;
+package de.irf.it.tuocci.core.api;
 
-import de.irf.it.tuocci.core.annotations.Attribute;
-import de.irf.it.tuocci.core.annotations.Category;
-import de.irf.it.tuocci.core.annotations.Kind;
+import de.irf.it.tuocci.core.api.annotations.Attribute;
+import de.irf.it.tuocci.core.api.annotations.Category;
+import de.irf.it.tuocci.core.api.annotations.Kind;
 
 /**
  * Defines a base association between two resources in the OCCI Core Model.

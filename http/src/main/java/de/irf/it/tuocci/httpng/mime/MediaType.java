@@ -15,9 +15,9 @@
  *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.irf.it.tuocci.httpng;
+package de.irf.it.tuocci.httpng.mime;
 
-import de.irf.it.tuocci.core.Entity;
+import de.irf.it.tuocci.core.api.Entity;
 
 /**
  * TODO: not yet commented.

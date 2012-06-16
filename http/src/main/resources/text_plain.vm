@@ -1,0 +1,23 @@
+
+
+<html>
+<body>
+I'm a velocity template.
+
+#if( $XHTML )
+  #set( $br = "<br />" )
+#else
+  #set( $br = "<br>" )
+#end
+
+$br
+$br
+
+Here we use a custom tool: $toytool.message
+
+$br
+$br
+
+Here we get the date from the DateTool:  $date.medium
+</body>
+</html>

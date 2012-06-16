@@ -15,7 +15,7 @@
  *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.irf.it.tuocci.core.annotations;
+package de.irf.it.tuocci.core.api.annotations;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

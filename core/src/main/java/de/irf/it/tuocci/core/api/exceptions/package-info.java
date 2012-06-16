@@ -19,4 +19,4 @@
  * Bundles exceptions being used for this OCCI Core Model implementation.
  *
  */
-package de.irf.it.tuocci.core.exceptions;
+package de.irf.it.tuocci.core.api.exceptions;
