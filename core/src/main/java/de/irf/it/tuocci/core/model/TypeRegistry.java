@@ -17,7 +17,7 @@
 
 // $Id$ //
 
-package de.irf.it.tuocci.core;
+package de.irf.it.tuocci.core.model;
 
 import de.irf.it.tuocci.core.annotations.Category;
 
@@ -32,7 +32,7 @@ import java.util.Set;
  *         Papaspyrou</a>
  * @version $Revision$ (as of $Date$)
  */
-public class ModelRegistry {
+public class TypeRegistry {
 
     /**
      * TODO: not yet commented.
@@ -49,7 +49,7 @@ public class ModelRegistry {
      *
      * @param registeredCategories
      */
-    public ModelRegistry(Set<Class<?>> registeredCategories) {
+    public TypeRegistry(Set<Class<?>> registeredCategories) {
         this.classesByCategory = new HashMap<Category, Class<?>>();
         this.categoriesByClass = new HashMap<Class<?>, Category>();
 

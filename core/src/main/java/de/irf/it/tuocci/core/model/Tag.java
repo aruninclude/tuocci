@@ -17,7 +17,7 @@
 
 // $Id$ //
 
-package de.irf.it.tuocci.core;
+package de.irf.it.tuocci.core.model;
 
 import de.irf.it.tuocci.core.annotations.Mixin;
 
