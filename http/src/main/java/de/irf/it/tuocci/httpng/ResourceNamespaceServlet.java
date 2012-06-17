@@ -23,6 +23,8 @@ package de.irf.it.tuocci.httpng;
 
 import de.irf.it.tuocci.httpng.mime.MediaType;
 
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -72,25 +74,25 @@ public class ResourceNamespaceServlet
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        super.doPost(req, resp);    //To change body of overridden methods use File | Settings | File Templates.
+        super.doPost(request, response);    //To change body of overridden methods use File | Settings | File Templates.
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String path = req.getPathInfo();
+        String path = request.getRequestURI().substring(request.getContextPath().length());
 
         /*
          * Determine client-consumable media type.
          */
         MediaType mt = null;
-        if (req.getHeader("Accept") == null) {
+        if (request.getHeader("Accept") == null) {
             mt = MediaType.TEXT_PLAIN;
         } // if
         else {
-            mt = MediaType.parseFrom(req.getHeader("Accept"));
+            mt = MediaType.parseFrom(request.getHeader("Accept"));
         } // else
 
         /*
@@ -98,7 +100,7 @@ public class ResourceNamespaceServlet
          */
         Location location = null;
         if (!this.resources.containsKey(path)) {
-            resp.sendError(HttpServletResponse.SC_NOT_FOUND);
+            response.sendError(HttpServletResponse.SC_NOT_FOUND);
             return;
         }
 
@@ -107,15 +109,15 @@ public class ResourceNamespaceServlet
         /*
          * Handle ETags.
          */
-        String inm = req.getHeader("If-None-Match");
+        String inm = request.getHeader("If-None-Match");
         String etag = Integer.toHexString(location.hashCode());
 
         if (etag.equals(inm)) {
-            resp.sendError(HttpServletResponse.SC_NOT_MODIFIED);
+            response.sendError(HttpServletResponse.SC_NOT_MODIFIED);
             return;
         } // if
 
-        resp.addHeader("ETag", etag);
+        response.addHeader("ETag", etag);
 
         /*
          * Determine the resource type.
@@ -127,11 +129,11 @@ public class ResourceNamespaceServlet
 
             // TODO: implement filtering
 
-            PrintWriter pw = resp.getWriter();
+            PrintWriter pw = response.getWriter();
             switch (mt) {
                 case TEXT_URILIST:
                     for (Location l : location.resources()) {
-                        pw.print(this.getBaseUrl(req));
+                        pw.print(this.getBaseUrl(request));
                         pw.println(l.path());
                     } // for
                     break; // TEXT_URI_LIST
@@ -139,24 +141,30 @@ public class ResourceNamespaceServlet
                     for (Location l : location.resources()) {
                         if (l.isEntity()) {
                             StringBuffer sb = new StringBuffer();
-                            sb.append(this.getBaseUrl(req));
+                            sb.append(this.getBaseUrl(request));
                             sb.append(l.path());
-                            resp.addHeader("X-OCCI-Location", sb.toString());
+                            response.addHeader("X-OCCI-Location", sb.toString());
                         } // if
                     } // for
                     break; // TEXT_OCCI
-                case TEXT_PLAIN:
                 case STAR_STAR:
+                case TEXT_PLAIN:
+                    request.setAttribute("location", location);
+                    ServletContext sc = this.getServletContext();
+                    RequestDispatcher rd = sc.getRequestDispatcher("/text_plain.jsp");
+                    rd.forward(request, response);
+/*
                     for (Location l : location.resources()) {
                         if (l.isEntity()) {
                             pw.print("X-OCCI-Location: ");
-                            pw.print(this.getBaseUrl(req));
+                            pw.print(this.getBaseUrl(request));
                             pw.println(l.path());
                         } // if
                     } // for
+ */
                     break; // TEXT_PLAIN | STAR_STAR
                 default:
-                    resp.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE);
+                    response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE);
             } // switch
         }
         else {
@@ -170,18 +178,18 @@ public class ResourceNamespaceServlet
                 case TEXT_OCCI:
                     for (String line : lines) {
                         int c = line.indexOf(":");
-                        resp.addHeader(line.substring(c), line.substring(c + 2, line.length()));
+                        response.addHeader(line.substring(c), line.substring(c + 2, line.length()));
                     } // for
                     break; // TEXT_OCCI
                 case TEXT_PLAIN:
                 case STAR_STAR:
-                    PrintWriter pw = resp.getWriter();
+                    PrintWriter pw = response.getWriter();
                     pw.write(rendering);
                     pw.flush();
                     pw.close();
                     break; // TEXT_PLAIN | STAR_STAR
                 default:
-                    resp.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE);
+                    response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE);
             } // switch
         }
     }

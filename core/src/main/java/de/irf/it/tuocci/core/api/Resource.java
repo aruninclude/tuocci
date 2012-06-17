@@ -113,14 +113,4 @@ public class Resource
     public void setLinks(Set<Link> links) {
         this.links = links;
     }
-
-    /*
-     * TODO: not yet documented
-     *
-     * @return
-     */
-    @Override
-    public EntityType getEntityType() {
-        return EntityType.RESOURCE;
-    }
 }

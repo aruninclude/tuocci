@@ -33,7 +33,6 @@
 
     <properties>
         <tuocci.java.version>1.6</tuocci.java.version>
-        <tuocci.cxf.version>2.4.1</tuocci.cxf.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     
@@ -44,6 +43,7 @@
         <module>core</module>
         <module>http</module>
         <module>infrastructure</module>
+        <module>httpng</module>
         <!--module>distribution</module-->
     </modules>
 

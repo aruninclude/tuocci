@@ -123,14 +123,4 @@ public class Link
     public void setTarget(Resource target) {
         this.target = target;
     }
-
-    /*
-     * TODO: not yet documented
-     *
-     * @return
-     */
-    @Override
-    public EntityType getEntityType() {
-        return EntityType.LINK;
-    }
 }
