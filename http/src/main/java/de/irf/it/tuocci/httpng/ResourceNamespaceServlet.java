@@ -149,6 +149,7 @@ public class ResourceNamespaceServlet
                     break; // TEXT_OCCI
                 case STAR_STAR:
                 case TEXT_PLAIN:
+                    request.setAttribute("baseUrl", path);
                     request.setAttribute("location", location);
                     ServletContext sc = this.getServletContext();
                     RequestDispatcher rd = sc.getRequestDispatcher("/text_plain.jsp");

@@ -18,21 +18,19 @@
 
 <!-- $Id$ -->
 
-<!DOCTYPE web-app PUBLIC
-        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
-        "http://java.sun.com/dtd/web-app_2_3.dtd">
-
-<web-app>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
     <servlet>
         <servlet-name>tuOcciQueryInterfaceServlet</servlet-name>
-        <display-name>tuOCCI Open Cloud Computing Interface Servlet (Query Interface)</display-name>
         <servlet-class>de.irf.it.tuocci.httpng.QueryInterfaceServlet</servlet-class>
+        <!--display-name>tuOCCI Open Cloud Computing Interface Servlet (Query Interface)</display-name-->
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet>
         <servlet-name>tuOcciResourceNamspaceServlet</servlet-name>
-        <display-name>tuOCCI Open Cloud Computing Interface Servlet (Resource Namespace)</display-name>
+        <!--display-name>tuOCCI Open Cloud Computing Interface Servlet (Resource Namespace)</display-name-->
         <servlet-class>de.irf.it.tuocci.httpng.ResourceNamespaceServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -40,9 +38,6 @@
     <servlet-mapping>
         <servlet-name>tuOcciQueryInterfaceServlet</servlet-name>
         <url-pattern>/-/</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>tuOcciQueryInterfaceServlet</servlet-name>
         <url-pattern>/.well-known/org/ogf/occi/-/</url-pattern>
     </servlet-mapping>
     <servlet-mapping>

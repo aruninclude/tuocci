@@ -1,3 +1,6 @@
+<%@ page import="de.irf.it.tuocci.httpng.Location"%>
+<%@ page import="java.util.Set"%>
+<%@ page import="java.util.HashSet"%>
 <%--
   ~ This file is part of tuOCCI.
   ~
@@ -15,10 +18,18 @@
   ~     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
   --%>
 <%@ page contentType="text/plain;charset=UTF-8" language="java" %>
+<%@ page trimDirectiveWhitespaces="true"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<c:forEach var="location" items="${requestScope.location.resources()}">
-X-OCCI-Location: ${location.path()}
+<%
+    Location location = (Location) request.getAttribute("location");
+    Set<String> paths = new HashSet<String>();
+    for (Location l : location.resources()) {
+        if (l.isEntity()) {
+            paths.add(l.path());
+        } // if
+    } // for
+    request.setAttribute("paths", paths);
+%><c:forEach var="p" items="${paths}">
+X-OCCI-Location: ${p}
 </c:forEach>
 
-Hello.

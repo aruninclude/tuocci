@@ -85,7 +85,7 @@ public enum MediaType {
                 break;
             } // if
         } // for
-        return result;
+        return TEXT_PLAIN;
     }
 
     abstract public String renderEntities(Entity... entities);
