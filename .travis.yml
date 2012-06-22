@@ -2,9 +2,3 @@ language: java
 jdk:
   - oraclejdk7
   - openjdk7
-
-notifications:
-  email:
-    recipients:
-      - tuocci+ci@googlegroups.com
-    on_success: always
