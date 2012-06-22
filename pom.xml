@@ -43,7 +43,6 @@
         <module>core</module>
         <module>http</module>
         <module>infrastructure</module>
-        <module>httpng</module>
         <!--module>distribution</module-->
     </modules>
 
