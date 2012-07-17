@@ -19,7 +19,7 @@
 
 package de.irf.it.tuocci.core.model;
 
-import de.irf.it.tuocci.core.api.annotations.Category;
+import de.irf.it.tuocci.annotations.Category;
 
 import java.util.HashMap;
 import java.util.Map;

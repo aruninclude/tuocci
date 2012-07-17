@@ -19,7 +19,7 @@ package de.irf.it.tuocci.core.api.exceptions;
 
 /**
  * Thrown when an object is provided as {@link
- * de.irf.it.tuocci.core.api.annotations.Mixin}, but has incomplete or invalid
+ * de.irf.it.tuocci.annotations.Mixin}, but has incomplete or invalid
  * annotations.
  *
  * @author <a href="mailto:alexander.papaspyrou@tu-dortmund.de>Alexander

@@ -18,7 +18,7 @@
 package de.irf.it.tuocci.core.api.exceptions;
 
 /**
- * Thrown when an {@link de.irf.it.tuocci.core.api.annotations.Attribute} cannot be
+ * Thrown when an {@link de.irf.it.tuocci.annotations.Attribute} cannot be
  * accessed on request. Possible reasons include
  * <ul>
  * <li>the attribute being not present on the Entity at all,</li>

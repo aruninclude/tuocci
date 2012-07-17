@@ -43,7 +43,8 @@
         <module>core</module>
         <module>http</module>
         <module>infrastructure</module>
-        <!--module>distribution</module-->
+        <module>annotations</module>
+        <module>util</module>
     </modules>
 
     <!-- Build Settings -->
@@ -57,12 +58,14 @@
                     <configuration>
                         <source>${tuocci.java.version}</source>
                         <target>${tuocci.java.version}</target>
+                        <verbose>true</verbose>
+                        <fork>true</fork>
                     </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
-                    <version>3.0-beta-2</version>
+                    <version>3.1</version>
                 </plugin>
    				<!--plugin>
 					<groupId>org.apache.maven.plugins</groupId>
@@ -126,7 +129,10 @@
         <system>GitHub</system>
         <url>https://github.com/irf/tuocci/issues</url>
     </issueManagement>
-    <ciManagement></ciManagement>
+    <ciManagement>
+        <system>Travis CI</system>
+        <url>http://travis-ci.org/irf/tuocci</url>
+    </ciManagement>
     <mailingLists>
         <mailingList>
             <name>tuOCCI -- Open Cloud Computing Interface Framework (Discussion
@@ -144,9 +150,4 @@
         <developerConnection>git@github.com:irf/tuocci.git</developerConnection>
     </scm>
     
-    <prerequisites></prerequisites>
-    <repositories></repositories>
-    <pluginRepositories></pluginRepositories>
-    <distributionManagement></distributionManagement>
-    <profiles></profiles>
 </project>

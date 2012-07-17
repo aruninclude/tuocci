@@ -34,9 +34,9 @@
 
 package de.irf.it.tuocci.core.api;
 
-import de.irf.it.tuocci.core.api.annotations.Attribute;
-import de.irf.it.tuocci.core.api.annotations.Category;
-import de.irf.it.tuocci.core.api.annotations.Kind;
+import de.irf.it.tuocci.annotations.Attribute;
+import de.irf.it.tuocci.annotations.Kind;
+import de.irf.it.tuocci.annotations.Category;
 
 import java.util.Set;
 
