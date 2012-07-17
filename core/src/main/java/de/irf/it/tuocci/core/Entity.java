@@ -15,6 +15,23 @@
  *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*
+ * This file is part of tuOCCI.
+ *
+ *     tuOCCI is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU Lesser General Public License as
+ *     published by the Free Software Foundation, either version 3 of
+ *     the License, or (at your option) any later version.
+ *
+ *     tuOCCI is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU Lesser General Public License for more details.
+ *
+ *     You should have received a copy of the GNU Lesser General Public
+ *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package de.irf.it.tuocci.core;
 
 import de.irf.it.tuocci.core.annotations.Action;
@@ -27,6 +44,7 @@ import de.irf.it.tuocci.core.exceptions.ActionTriggerException;
 import de.irf.it.tuocci.core.exceptions.AttributeAccessException;
 import de.irf.it.tuocci.core.exceptions.InvalidMixinException;
 import de.irf.it.tuocci.core.exceptions.UnsupportedMixinException;
+import de.irf.it.tuocci.core.interfaces.Queryable;
 
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
@@ -77,7 +95,9 @@ import java.util.UUID;
  */
 @Category(term = "entity", scheme = "http://schemas.ogf.org/occi/core#", title = "Entity type")
 @Kind
-public abstract class Entity {
+@Attaches(mixins = {Tag.class})
+public abstract class Entity
+        implements Queryable {
 
     /**
      * A unique identifier (within the service provider's namespace) of this
@@ -201,7 +221,7 @@ public abstract class Entity {
         /*
          * Check whether the examined object is annotated properly.
          */
-        if (o.getClass().isAnnotationPresent(Mixin.class) && o.getClass().isAnnotationPresent(Category.class)) {
+        if (o.getClass().isAnnotationPresent(Mixin.class)) {
             /*
              * yes: Check whether the provided mixin is supported by this resource type.
              */
@@ -209,8 +229,25 @@ public abstract class Entity {
                 /*
                  * yes: Add to list of attached mixins and notify subclasses.
                  */
-                Category c = o.getClass().getAnnotation(Category.class);
-                this.mixins.put(c.scheme() + c.term(), o);
+                String key = null;
+                if (o instanceof Tag) {
+                    Tag t = (Tag) o;
+                    key = new StringBuilder().append(t.getScheme()).append(t.getTerm()).toString();
+                }
+                else {
+                    if (o.getClass().isAnnotationPresent(Category.class)) {
+                        Category c = o.getClass().getAnnotation(Category.class);
+                        key = new StringBuilder().append(c.scheme()).append(c.term()).toString();
+                    }
+                    else {
+                        String message = new StringBuilder("mixin not usable: '@Category' annotation missing on \"")
+                                .append(o.getClass().getName())
+                                .append("\".")
+                                .toString();
+                        throw new InvalidMixinException(message);
+                    }
+                }
+                this.mixins.put(key, o);
             } // if
             else {
                 /*
@@ -230,7 +267,7 @@ public abstract class Entity {
             /*
              * no: throw an exception denoting that the provided object is no mixin.
              */
-            String message = new StringBuilder("not a mixin: '@Category' or '@Mixin' annotations missing on \"")
+            String message = new StringBuilder("not a mixin: '@Mixin' annotations missing on \"")
                     .append(o.getClass().getName())
                     .append("\".")
                     .toString();
@@ -286,7 +323,12 @@ public abstract class Entity {
         return result;
     }
 
-    public Set<Attribute> listAttributes() {
+    /**
+     * TODO: not yet commented.
+     *
+     * @return
+     */
+    public Set<Attribute> getAttributes() {
         Set<Attribute> result = new HashSet<Attribute>();
 
         /*
@@ -492,7 +534,7 @@ public abstract class Entity {
      *         if the requested attribute cannot be found on this entity or any
      *         attached mixin, or underlying manipulation failed.
      */
-    public final void setAttribute(String name, String value)
+    public final void setAttributeValue(String name, String value)
             throws AttributeAccessException {
         Method setter = null;
         Object target = null;

@@ -26,47 +26,22 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!-- The Basics -->
-    <groupId>de.irf.it</groupId>
+    <groupId>de.irf.it.tuocci</groupId>
     <artifactId>tuocci-core</artifactId>
-    <version>0.2</version>
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>commons-lang</groupId>
-            <artifactId>commons-lang</artifactId>
-            <version>2.4</version>
-        </dependency>
-        <dependency>
-            <groupId>commons-configuration</groupId>
-            <artifactId>commons-configuration</artifactId>
-            <version>1.6</version>
-        </dependency>
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.6.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.testng</groupId>
-            <artifactId>testng</artifactId>
-            <version>6.0.1</version>
-        </dependency>
-    </dependencies>
+    <version>0.4</version>
+
     <parent>
         <groupId>de.irf.it.tuocci</groupId>
         <artifactId>tuocci</artifactId>
-        <version>0.3.1</version>
+        <version>0.4</version>
     </parent>
+    
+    <dependencies>
+    </dependencies>
+    
     <!-- Build Settings -->
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
@@ -86,36 +61,5 @@
     <!-- More Project Information -->
     <name>tuOCCI Core Model Implementation</name>
     <description>...</description>
-    <inceptionYear>2011</inceptionYear>
-    <developers>
-        <developer>
-            <id>smsnheck</id>
-            <name>Sebastian Heckmann</name>
-            <roles>
-                <role>Module Sheperd</role>
-                <role>Developer</role>
-            </roles>
-        </developer>
-        <developer>
-            <id>sebastianlaag</id>
-            <name>Sebastian Laag</name>
-            <roles>
-                <role>Developer</role>
-            </roles>
-        </developer>
-        <developer>
-            <id>lxndrp</id>
-            <name>Alexander Papaspyrou</name>
-            <email>alexander.papaspyrou@tu-dortmund.de</email>
-            <organization>TU Dortmund University</organization>
-            <organizationUrl>http://www.tu-dortmund.de</organizationUrl>
-            <roles>
-                <role>Developer</role>
-            </roles>
-        </developer>
-    </developers>
-
-    <!-- Environment Settings -->
-    <!-- <profiles>...</profiles> -->
 
 </project>

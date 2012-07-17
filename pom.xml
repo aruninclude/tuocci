@@ -28,28 +28,24 @@
     <!-- The Basics -->
     <groupId>de.irf.it.tuocci</groupId>
     <artifactId>tuocci</artifactId>
-    <version>0.3.1</version>
+    <version>0.4</version>
     <packaging>pom</packaging>
-    <dependencies></dependencies>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.8.2</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
-    <modules>
-        <module>core</module>
-        <!-- <module>distribution</module> -->
-        <module>http</module>
-        <module>infrastructure</module>
-    </modules>
+
     <properties>
         <tuocci.java.version>1.6</tuocci.java.version>
+        <tuocci.cxf.version>2.4.1</tuocci.cxf.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+    
+    <dependencies>
+    </dependencies>
+
+    <modules>
+        <module>core</module>
+        <module>http</module>
+        <module>infrastructure</module>
+        <!--module>distribution</module-->
+    </modules>
 
     <!-- Build Settings -->
     <build>
@@ -69,16 +65,26 @@
                     <artifactId>maven-site-plugin</artifactId>
                     <version>3.0-beta-2</version>
                 </plugin>
+   				<!--plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+    				<artifactId>maven-surefire-plugin</artifactId>
+   					<version>${surefire.version}</version>
+				</plugin-->
             </plugins>
         </pluginManagement>
     </build>
 
     <!-- More Project Information -->
     <name>tuOCCI Open Cloud Computing Interface Framework</name>
-    <description>...</description>
-    <url></url>
+    <description>The tuOCCI Open Cloud Computing Interface Framework is a 100% Java™ implementation of the Open Cloud Computing Interface (OCCI) family of specifications. More specifically, it provides a full implementation of the OCCI Core (GFD.183), OCCI Infrastructure (GFD.184), and OCCI RESTful HTTP Rendering (GFD.185) specifications, and passes the doyouspeakOCCI compliance tests.</description>
+    <url>http://irf.github.com/tuocci</url>
     <inceptionYear>2011</inceptionYear>
-    <licenses></licenses>
+    <licenses>
+        <license>
+            <name>GNU Lesser General Public License, Version 3.0</name>
+            <url>http://www.gnu.org/licenses/lgpl-3.0.html</url>
+        </license>
+    </licenses>
     <organization>
         <name>Institut für Roboterforschung, Technische Universität Dortmund
         </name>
@@ -86,38 +92,40 @@
     </organization>
     <developers>
         <developer>
-            <id>smsnheck</id>
-            <name>Sebastian Heckmann</name>
-            <roles>
-                <role>Release Manager</role>
-            </roles>
-        </developer>
-        <developer>
-            <id>sebastianlaag</id>
-            <name>Sebastian Laag</name>
-            <roles>
-                <role>Packager</role>
-            </roles>
-        </developer>
-        <developer>
             <id>lxndrp</id>
             <name>Alexander Papaspyrou</name>
             <email>alexander.papaspyrou@tu-dortmund.de</email>
             <roles>
                 <role>Project Manager</role>
+                <role>Developer</role>
+            </roles>
+        </developer>
+        <developer>
+            <id>mrtg</id>
+            <name>Tassilo Galonstka</name>
+            <email>tassilo.galonska@tu-dortmund.de</email>
+            <roles>
+                <role>Maintainer</role>
+                <role>Developer</role>
             </roles>
         </developer>
     </developers>
     <contributors>
         <contributor>
+            <name>Sebastian Heckmann</name>
+        </contributor>
+        <contributor>
             <name>Sebastian Herbermann</name>
+        </contributor>
+        <contributor>
+            <name>Sebastian Laag</name>
         </contributor>
     </contributors>
 
     <!-- Environment Settings -->
     <issueManagement>
         <system>GitHub</system>
-        <url>http://irf.github.com/tuocci</url>
+        <url>https://github.com/irf/tuocci/issues</url>
     </issueManagement>
     <ciManagement></ciManagement>
     <mailingLists>
@@ -136,6 +144,7 @@
         <connection>scm:git:git@github.com:irf/tuocci.git</connection>
         <developerConnection>git@github.com:irf/tuocci.git</developerConnection>
     </scm>
+    
     <prerequisites></prerequisites>
     <repositories></repositories>
     <pluginRepositories></pluginRepositories>

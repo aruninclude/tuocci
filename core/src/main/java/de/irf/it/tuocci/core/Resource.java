@@ -15,6 +15,23 @@
  *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*
+ * This file is part of tuOCCI.
+ *
+ *     tuOCCI is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU Lesser General Public License as
+ *     published by the Free Software Foundation, either version 3 of
+ *     the License, or (at your option) any later version.
+ *
+ *     tuOCCI is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU Lesser General Public License for more details.
+ *
+ *     You should have received a copy of the GNU Lesser General Public
+ *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package de.irf.it.tuocci.core;
 
 import de.irf.it.tuocci.core.annotations.Attribute;
@@ -71,7 +88,8 @@ public class Resource
      * Modifies the summarizing description of this resource.
      *
      * @param summary
-     *         The new value for the summarizing description of this resource.
+     *         The new value for the summarizing description of this
+     *         resource.
      */
     public void setSummary(String summary) {
         this.summary = summary;
@@ -94,5 +112,15 @@ public class Resource
      */
     public void setLinks(Set<Link> links) {
         this.links = links;
+    }
+
+    /*
+     * TODO: not yet documented
+     *
+     * @return
+     */
+    @Override
+    public EntityType getEntityType() {
+        return EntityType.RESOURCE;
     }
 }
