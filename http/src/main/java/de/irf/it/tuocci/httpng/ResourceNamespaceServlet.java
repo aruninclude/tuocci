@@ -19,7 +19,7 @@
 
 package de.irf.it.tuocci.httpng;
 
-//import de.irf.it.tuocci.httpng.resources.Collection;
+//import de.irf.it.tuocci.httpng.getResources.Collection;
 
 import de.irf.it.tuocci.httpng.mime.MediaType;
 
@@ -54,9 +54,9 @@ public class ResourceNamespaceServlet
         Location b = new Location("/wurst/salami");
         l.addResource(a);
         l.addResource(b);
-        this.resources.put(l.path(), l);
-        this.resources.put(a.path(), a);
-        this.resources.put(b.path(), b);
+        this.resources.put(l.getPath(), l);
+        this.resources.put(a.getPath(), a);
+        this.resources.put(b.getPath(), b);
     }
 
     //private Map<String, Entity> pathToEntityMapping;
@@ -132,17 +132,17 @@ public class ResourceNamespaceServlet
             PrintWriter pw = response.getWriter();
             switch (mt) {
                 case TEXT_URILIST:
-                    for (Location l : location.resources()) {
+                    for (Location l : location.getResources()) {
                         pw.print(this.getBaseUrl(request));
-                        pw.println(l.path());
+                        pw.println(l.getPath());
                     } // for
                     break; // TEXT_URI_LIST
                 case TEXT_OCCI:
-                    for (Location l : location.resources()) {
+                    for (Location l : location.getResources()) {
                         if (l.isEntity()) {
                             StringBuffer sb = new StringBuffer();
                             sb.append(this.getBaseUrl(request));
-                            sb.append(l.path());
+                            sb.append(l.getPath());
                             response.addHeader("X-OCCI-Location", sb.toString());
                         } // if
                     } // for
@@ -155,11 +155,11 @@ public class ResourceNamespaceServlet
                     RequestDispatcher rd = sc.getRequestDispatcher("/text_plain.jsp");
                     rd.forward(request, response);
 /*
-                    for (Location l : location.resources()) {
+                    for (Location l : location.getResources()) {
                         if (l.isEntity()) {
                             pw.print("X-OCCI-Location: ");
                             pw.print(this.getBaseUrl(request));
-                            pw.println(l.path());
+                            pw.println(l.getPath());
                         } // if
                     } // for
  */

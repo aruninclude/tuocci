@@ -34,10 +34,6 @@
 
 package de.irf.it.tuocci.core.api;
 
-import de.irf.it.tuocci.core.api.annotations.Attribute;
-import de.irf.it.tuocci.core.api.annotations.Category;
-import de.irf.it.tuocci.core.api.annotations.Kind;
-
 /**
  * Defines a base association between two resources in the OCCI Core Model.
  * <p/>

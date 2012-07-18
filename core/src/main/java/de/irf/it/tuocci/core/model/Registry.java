@@ -19,9 +19,21 @@
 
 package de.irf.it.tuocci.core.model;
 
-import de.irf.it.tuocci.core.api.annotations.Category;
+import de.irf.it.tuocci.core.api.Category;
+import de.irf.it.tuocci.core.api.Entity;
+import de.irf.it.tuocci.core.api.Kind;
+import de.irf.it.tuocci.core.model.representation.CategoryBean;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
+import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
+import org.springframework.context.ApplicationContext;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -32,32 +44,34 @@ import java.util.Set;
  *         Papaspyrou</a>
  * @version $Revision$ (as of $Date$)
  */
-public class TypeRegistry {
+public class Registry{
 
-    /**
-     * TODO: not yet commented.
-     */
-    private Map<Category, Class<?>> classesByCategory;
+    private static Registry instance;
 
-    /**
-     * TODO: not yet commented.
-     */
-    private Map<Class<?>, Category> categoriesByClass;
+    public static Registry getInstance() {
+        if(instance == null) {
+            instance = new Registry();
+        } // if
+        return instance;
+    }
+
+    private Set<CategoryBean> categoryBeanSet;
+
+    public Registry() {
+        this.categoryBeanSet = new HashSet<CategoryBean>();
+    }
+
+
 
     /**
      * TODO: not yet commented.
      *
      * @param registeredCategories
      */
-    public TypeRegistry(Set<Class<?>> registeredCategories) {
-        this.classesByCategory = new HashMap<Category, Class<?>>();
-        this.categoriesByClass = new HashMap<Class<?>, Category>();
-
+    public Registry(Set<Class<?>> registeredCategories) {
         for(Class<?> rc : registeredCategories) {
             if(rc.isAnnotationPresent(Category.class)) {
                 Category c = rc.getAnnotation(Category.class);
-                this.classesByCategory.put(c, rc);
-                this.categoriesByClass.put(rc, c);
             } // if
             else {
                 String message = new StringBuilder("type not acceptable: '@Category' annotations missing on \"")
@@ -69,23 +83,18 @@ public class TypeRegistry {
         } // for
     }
 
-    /**
-     * TODO: not yet commented.
-     *
-     * @param category
-     * @return
-     */
-    public Class<?> find(Category category) {
-        return this.classesByCategory.get(category);
-    }
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory)
+            throws BeansException {
+        Map<String, Object> entityTypes = beanFactory.getBeansWithAnnotation(Category.class);
+        for(Object o : entityTypes.values()) {
+            if(o instanceof Entity) {
+                Entity e = (Entity) o;
+                
+            } // if
 
-    /**
-     * TODO: not yet commented.
-     *
-     * @param c1ass
-     * @return
-     */
-    public Category find(Class<?> c1ass) {
-        return this.categoriesByClass.get(c1ass);
+
+        } // for
+
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 }

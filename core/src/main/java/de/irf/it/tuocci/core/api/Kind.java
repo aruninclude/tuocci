@@ -17,7 +17,9 @@
 
 // $Id$ //
 
-package de.irf.it.tuocci.core.api.annotations;
+package de.irf.it.tuocci.core.api;
+
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;

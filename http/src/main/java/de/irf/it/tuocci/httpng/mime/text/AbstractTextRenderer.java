@@ -19,11 +19,11 @@
 
 package de.irf.it.tuocci.httpng.mime.text;
 
+import de.irf.it.tuocci.core.api.Attribute;
+import de.irf.it.tuocci.core.api.Category;
 import de.irf.it.tuocci.core.api.Entity;
 import de.irf.it.tuocci.core.api.Link;
-import de.irf.it.tuocci.core.api.annotations.Attribute;
-import de.irf.it.tuocci.core.api.annotations.Category;
-import de.irf.it.tuocci.core.api.exceptions.AttributeAccessException;
+import de.irf.it.tuocci.core.exceptions.AttributeAccessException;
 
 /**
  * TODO: not yet commented.

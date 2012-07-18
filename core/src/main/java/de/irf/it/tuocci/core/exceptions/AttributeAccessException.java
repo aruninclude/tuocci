@@ -15,10 +15,10 @@
  *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.irf.it.tuocci.core.api.exceptions;
+package de.irf.it.tuocci.core.exceptions;
 
 /**
- * Thrown when an {@link de.irf.it.tuocci.core.api.annotations.Attribute} cannot be
+ * Thrown when an {@link de.irf.it.tuocci.core.api.Attribute} cannot be
  * accessed on request. Possible reasons include
  * <ul>
  * <li>the attribute being not present on the Entity at all,</li>

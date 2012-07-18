@@ -23,6 +23,7 @@ import de.irf.it.tuocci.core.api.Entity;
 import org.apache.commons.lang3.builder.EqualsBuilder;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -55,7 +56,7 @@ public class Location {
         this.entity = entity;
     }
 
-    public String path() {
+    public String getPath() {
         return this.path;
     }
 
@@ -67,8 +68,8 @@ public class Location {
         this.resources.remove(location);
     }
 
-    public Location[] resources() {
-        return this.resources.toArray(new Location[this.resources.size()]);
+    public Set<Location> getResources() {
+        return Collections.unmodifiableSet(this.resources);
     }
 
     public Entity getEntity() {

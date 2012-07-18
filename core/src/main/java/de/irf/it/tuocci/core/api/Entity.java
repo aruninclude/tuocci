@@ -34,16 +34,10 @@
 
 package de.irf.it.tuocci.core.api;
 
-import de.irf.it.tuocci.core.api.annotations.Action;
-import de.irf.it.tuocci.core.api.annotations.Attaches;
-import de.irf.it.tuocci.core.api.annotations.Attribute;
-import de.irf.it.tuocci.core.api.annotations.Category;
-import de.irf.it.tuocci.core.api.annotations.Kind;
-import de.irf.it.tuocci.core.api.annotations.Mixin;
-import de.irf.it.tuocci.core.api.exceptions.ActionTriggerException;
-import de.irf.it.tuocci.core.api.exceptions.AttributeAccessException;
-import de.irf.it.tuocci.core.api.exceptions.InvalidMixinException;
-import de.irf.it.tuocci.core.api.exceptions.UnsupportedMixinException;
+import de.irf.it.tuocci.core.exceptions.ActionTriggerException;
+import de.irf.it.tuocci.core.exceptions.AttributeAccessException;
+import de.irf.it.tuocci.core.exceptions.InvalidMixinException;
+import de.irf.it.tuocci.core.exceptions.UnsupportedMixinException;
 import de.irf.it.tuocci.core.model.Tag;
 
 import java.beans.BeanInfo;

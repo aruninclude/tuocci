@@ -15,11 +15,11 @@
  *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.irf.it.tuocci.core.api.exceptions;
+package de.irf.it.tuocci.core.exceptions;
 
 /**
  * Thrown when an object is provided as {@link
- * de.irf.it.tuocci.core.api.annotations.Mixin}, but has incomplete or invalid
+ * de.irf.it.tuocci.core.api.Mixin}, but has incomplete or invalid
  * annotations.
  *
  * @author <a href="mailto:alexander.papaspyrou@tu-dortmund.de>Alexander
