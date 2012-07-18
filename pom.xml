@@ -59,7 +59,6 @@
                         <source>${tuocci.java.version}</source>
                         <target>${tuocci.java.version}</target>
                         <verbose>true</verbose>
-                        <fork>true</fork>
                     </configuration>
                 </plugin>
                 <plugin>

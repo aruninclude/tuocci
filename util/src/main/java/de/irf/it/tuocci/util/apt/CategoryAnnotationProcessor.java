@@ -25,8 +25,15 @@ import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
+import javax.lang.model.element.ElementKind;
 import javax.lang.model.element.TypeElement;
 import javax.tools.Diagnostic;
+import javax.tools.FileObject;
+import javax.tools.StandardLocation;
+import java.io.File;
+import java.io.IOException;
+import java.io.Writer;
+import java.util.Properties;
 import java.util.Set;
 
 /**
@@ -36,18 +43,75 @@ import java.util.Set;
  *         Papaspyrou</a>
  * @version $Revision$ (as of $Date$)
  */
-@SupportedAnnotationTypes({"de.irf.it.tuocci.annotations.Category"})
+@SupportedAnnotationTypes("de.irf.it.tuocci.annotations.Category")
 @SupportedSourceVersion(SourceVersion.RELEASE_6)
-public class CategoryAnnotationProcessor extends AbstractProcessor {
+public class CategoryAnnotationProcessor
+        extends AbstractProcessor {
+
+    public static final String DETECTED_PROPERTIES = "de.irf.it.tuocci.category.detected.properties";
 
     @Override
     public boolean process(Set<? extends TypeElement> typeElements, RoundEnvironment roundEnvironment) {
-        for (Element elem : roundEnvironment.getElementsAnnotatedWith(Category.class)) {
-            Category category = elem.getAnnotation(Category.class);
-            String message = "annotation found in " + elem.getSimpleName()
-                    + " with complexity " + category.scheme() + category.term();
-            processingEnv.getMessager().printMessage(Diagnostic.Kind.NOTE, message);
-        } // for
-        return true;
+        boolean result;
+
+        /*
+         * Check compiler pass, and only act on first round.
+         */
+        Set<? extends Element> elements = roundEnvironment.getElementsAnnotatedWith(Category.class);
+        if (!roundEnvironment.processingOver() && !elements.isEmpty()) {
+            for(TypeElement te : typeElements) {
+                System.out.println(te.getQualifiedName());
+            }
+            for(Element e: roundEnvironment.getRootElements()) {
+                System.out.println(e.getSimpleName());
+            }
+            /*
+             * Collect elements in property set.
+             */
+            Properties p = new Properties();
+            for (Element element : roundEnvironment.getElementsAnnotatedWith(Category.class)) {
+                /*
+                 * Check if element is a type (could be method for OCCI actions).
+                 */
+                if (ElementKind.CLASS.equals(element.getKind())) {
+                    Category c = element.getAnnotation(Category.class);
+                    String category = c.scheme() + c.term();
+                    String type = ((TypeElement) element).getQualifiedName().toString();
+                    p.setProperty(category, type);
+                } // if
+            } // for
+
+            /*
+             * Write out property set to disk.
+             */
+            try {
+                FileObject fo = processingEnv.getFiler().createResource(StandardLocation.SOURCE_OUTPUT, "", DETECTED_PROPERTIES);
+                Writer w = fo.openWriter();
+                p.store(w, "tuOCCI: Result of Kind/Mixin detection on classpath");
+                w.flush();
+                w.close();
+            } // try
+            catch (IOException e) {
+                StringBuffer sb = new StringBuffer();
+                sb.append("failed to store <");
+                sb.append(StandardLocation.SOURCE_OUTPUT).append(File.separator).append(DETECTED_PROPERTIES);
+                sb.append("> as property set (message was '");
+                sb.append(e.getLocalizedMessage());
+                sb.append("')");
+
+                String message = sb.toString();
+                processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, message);
+                throw new RuntimeException(message, e);
+            } // catch
+            finally {
+                result = true;
+            } // finally
+        } // if
+        else {
+            // do nothing here.
+            result = false;
+        } // if
+
+        return result;
     }
 }
