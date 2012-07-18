@@ -19,9 +19,9 @@
 
 package de.irf.it.tuocci.infrastructure.network;
 
-import de.irf.it.tuocci.core.api.Attribute;
-import de.irf.it.tuocci.core.api.Category;
-import de.irf.it.tuocci.core.api.Mixin;
+import de.irf.it.tuocci.annotations.Attribute;
+import de.irf.it.tuocci.annotations.Category;
+import de.irf.it.tuocci.annotations.Mixin;
 
 /**
  * TODO: not yet commented.

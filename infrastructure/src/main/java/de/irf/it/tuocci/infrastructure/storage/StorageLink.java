@@ -36,10 +36,10 @@
 
 package de.irf.it.tuocci.infrastructure.storage;
 
-import de.irf.it.tuocci.core.api.Attribute;
-import de.irf.it.tuocci.core.api.Category;
-import de.irf.it.tuocci.core.api.Kind;
 import de.irf.it.tuocci.core.api.Link;
+import de.irf.it.tuocci.annotations.Attribute;
+import de.irf.it.tuocci.annotations.Category;
+import de.irf.it.tuocci.annotations.Kind;
 import de.irf.it.tuocci.infrastructure.compute.Compute;
 
 /**

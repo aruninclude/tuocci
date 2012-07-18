@@ -19,13 +19,13 @@ package de.irf.it.tuocci.core.exceptions;
 
 /**
  * Thrown when an object is provided as {@link
- * de.irf.it.tuocci.core.api.Mixin}, but has incomplete or invalid
+ * de.irf.it.tuocci.annotations.Mixin}, but has incomplete or invalid
  * annotations.
  *
  * @author <a href="mailto:alexander.papaspyrou@tu-dortmund.de>Alexander
  *         Papaspyrou</a>
  * @version $Id$
- * @see de.irf.it.tuocci.core.api.annotations
+ * @see de.irf.it.tuocci.annotations
  * @since 0.3 ("gordons")
  */
 public class InvalidMixinException

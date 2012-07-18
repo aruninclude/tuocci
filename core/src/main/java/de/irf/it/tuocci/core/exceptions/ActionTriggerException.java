@@ -18,7 +18,7 @@
 package de.irf.it.tuocci.core.exceptions;
 
 /**
- * Thrown when an {@link de.irf.it.tuocci.core.api.Action} cannot be
+ * Thrown when an {@link de.irf.it.tuocci.annotations.Action} cannot be
  * properly invoked. Possible reasons include
  * <ul>
  * <li>the action being not present on the Entity at all,</li>
@@ -42,8 +42,8 @@ package de.irf.it.tuocci.core.exceptions;
  * @author <a href="mailto:alexander.papaspyrou@tu-dortmund.de>Alexander
  *         Papaspyrou</a>
  * @version $Id$
- * @see de.irf.it.tuocci.core.api.Attribute
- * @see de.irf.it.tuocci.core.api.annotations
+ * @see de.irf.it.tuocci.annotations.Attribute
+ * @see de.irf.it.tuocci.annotations
  * @since 0.3 ("gordons")
  */
 public class ActionTriggerException

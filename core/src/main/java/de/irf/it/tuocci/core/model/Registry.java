@@ -19,19 +19,10 @@
 
 package de.irf.it.tuocci.core.model;
 
-import de.irf.it.tuocci.core.api.Category;
-import de.irf.it.tuocci.core.api.Entity;
-import de.irf.it.tuocci.core.api.Kind;
-import de.irf.it.tuocci.core.model.representation.CategoryBean;
-import org.springframework.beans.BeansException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
-import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
-import org.springframework.context.ApplicationContext;
+import de.irf.it.tuocci.annotations.Category;
 
-import javax.annotation.Resource;
+import de.irf.it.tuocci.core.model.representation.CategoryBean;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -61,8 +52,6 @@ public class Registry{
         this.categoryBeanSet = new HashSet<CategoryBean>();
     }
 
-
-
     /**
      * TODO: not yet commented.
      *
@@ -72,6 +61,8 @@ public class Registry{
         for(Class<?> rc : registeredCategories) {
             if(rc.isAnnotationPresent(Category.class)) {
                 Category c = rc.getAnnotation(Category.class);
+//                this.classesByCategory.put(c, rc);
+//                this.categoriesByClass.put(rc, c);
             } // if
             else {
                 String message = new StringBuilder("type not acceptable: '@Category' annotations missing on \"")
@@ -81,20 +72,5 @@ public class Registry{
                 throw new IllegalArgumentException(message);
             } // else
         } // for
-    }
-
-    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory)
-            throws BeansException {
-        Map<String, Object> entityTypes = beanFactory.getBeansWithAnnotation(Category.class);
-        for(Object o : entityTypes.values()) {
-            if(o instanceof Entity) {
-                Entity e = (Entity) o;
-                
-            } // if
-
-
-        } // for
-
-        //To change body of implemented methods use File | Settings | File Templates.
     }
 }

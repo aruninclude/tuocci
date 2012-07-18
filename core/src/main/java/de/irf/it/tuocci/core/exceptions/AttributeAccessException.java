@@ -18,7 +18,7 @@
 package de.irf.it.tuocci.core.exceptions;
 
 /**
- * Thrown when an {@link de.irf.it.tuocci.core.api.Attribute} cannot be
+ * Thrown when an {@link de.irf.it.tuocci.annotations.Attribute} cannot be
  * accessed on request. Possible reasons include
  * <ul>
  * <li>the attribute being not present on the Entity at all,</li>
@@ -38,7 +38,7 @@ package de.irf.it.tuocci.core.exceptions;
  * @version $Id$
  * @see <a href="http://download.oracle.com/javase/1.5.0/docs/guide/beans/index.html">The
  *      Java Beans Component API</a>
- * @see de.irf.it.tuocci.core.api.annotations
+ * @see de.irf.it.tuocci.annotations
  * @since 0.3 ("gordons")
  */
 public class AttributeAccessException

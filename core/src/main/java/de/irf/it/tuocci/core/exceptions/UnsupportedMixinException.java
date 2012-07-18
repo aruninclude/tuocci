@@ -18,14 +18,14 @@
 package de.irf.it.tuocci.core.exceptions;
 
 /**
- * Thrown when a {@link de.irf.it.tuocci.core.api.Mixin} is attached to
+ * Thrown when a {@link de.irf.it.tuocci.annotations.Mixin} is attached to
  * a class that does not indicate support for it.
  * <p/>
  * More specifically, if a <code>Mixin</code> instance is assigned using
  * {@link de.irf.it.tuocci.core.api.Entity#attachMixin(Object)},
  * a check is performed whether the <code>Entity</code> instance (or the
  * corresponding sub-class of it) carries the {@link
- * de.irf.it.tuocci.core.api.Attaches} annotation with the value of
+ * de.irf.it.tuocci.annotations.Attaches} annotation with the value of
  * {@link Object#getClass()} for the provided <code>Mixin</code>. If not,
  * this exception is raised.
  *

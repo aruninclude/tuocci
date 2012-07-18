@@ -34,6 +34,12 @@
 
 package de.irf.it.tuocci.core.api;
 
+import de.irf.it.tuocci.annotations.Action;
+import de.irf.it.tuocci.annotations.Attribute;
+import de.irf.it.tuocci.annotations.Category;
+import de.irf.it.tuocci.annotations.Kind;
+import de.irf.it.tuocci.annotations.Mixin;
+import de.irf.it.tuocci.annotations.Attaches;
 import de.irf.it.tuocci.core.exceptions.ActionTriggerException;
 import de.irf.it.tuocci.core.exceptions.AttributeAccessException;
 import de.irf.it.tuocci.core.exceptions.InvalidMixinException;
@@ -799,8 +805,8 @@ public abstract class Entity {
      * using the provided attribute values as arguments to it.
      * <p/>
      * More specifically, this method searches both the entity instance and all
-     * currently attached mixins for a method with an {@link Action} annotation
-     * of {@link Category} identified by the term/scheme combination as
+     * currently attached mixins for a method with an {@link de.irf.it.tuocci.annotations.Action} annotation
+     * of {@link de.irf.it.tuocci.annotations.Category} identified by the term/scheme combination as
      * provided
      * and, if found, invokes this method with the attribute values as its
      * arguments.
