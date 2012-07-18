@@ -36,7 +36,7 @@
 
 package de.irf.it.tuocci.infrastructure.network;
 
-import de.irf.it.tuocci.core.api.Resource;
+import de.irf.it.tuocci.core.Resource;
 import de.irf.it.tuocci.annotations.Action;
 import de.irf.it.tuocci.annotations.Attaches;
 import de.irf.it.tuocci.annotations.Attribute;

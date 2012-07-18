@@ -32,23 +32,18 @@
  *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.irf.it.tuocci.core.api;
+package de.irf.it.tuocci.core;
 
 import de.irf.it.tuocci.annotations.Attribute;
 import de.irf.it.tuocci.annotations.Kind;
 import de.irf.it.tuocci.annotations.Category;
 
-import java.util.Set;
-
 /**
- * Describes a concrete resource in the OCCI Core Model.
+ * Defines a base association between two resources in the OCCI Core Model.
  * <p/>
- * A <code>Resource</code> is the general object in the OCCI Core Model and
- * suitable to represent real world resources such as machines, services, etc.
- * through specialization.
- * <p/>
- * It also exposes means for building related groups of resources via
- * corresponding link objects, and mechanisms for their manipulation.
+ * A <code>Link</code> indicates that one <code>resource</code> instance is
+ * connected to another. Either its source or target may refer to an item not
+ * within the owning service provider's domain.
  *
  * @author <a href="mailto:alexander.papaspyrou@tu-dortmund.de">Alexander
  *         Papaspyrou</a>
@@ -56,61 +51,76 @@ import java.util.Set;
  * @see "Ralf Nyrén, Andy Edmonds, Alexander Papaspyrou, and Thijs Metsch, <a
  *      href="http://ogf.org/documents/GFD.183.pdf">Open Cloud Computing
  *      Interface &ndash; Core</a>, Open Grid Forum Proposed Recommendation,
- *      GFD-P-R.183, April 2011, Section 4.5.2"
+ *      GFD-P-R.183, April 2011, Section 4.5.3"
  * @since 0.3 ("gordons")
  */
-@Category(term = "resource", scheme = "http://schemas.ogf.org/occi/core#", title = "Resource")
+@Category(term = "link", scheme = "http://schemas.ogf.org/occi/core#", title = "Link")
 @Kind
-public class Resource
+public class Link
         extends Entity {
 
     /**
-     * A summarizing description of the Resource instance.
+     * The {@link Resource} instance this <code>Link</code> originates from.
      */
-    @Attribute(name = "occi.core.summary", required = false, mutable = true)
-    private String summary;
+    @Attribute(name = "occi.core.source", required = true)
+    private Resource source;
 
     /**
-     * A set of {@link Link} compositions.
+     * The {@link Resource} instance this <code>Link</code> points to.
      */
-    private Set<Link> links;
+    @Attribute(name = "occi.core.target", required = true)
+    private Resource target;
 
     /**
-     * Returns the summarizing description of this resource.
+     * Creates a new instance of this class, using the given parameters.
      *
-     * @return The summarizing description of this resource.
+     * @param source
+     *         The {@link Resource} instance this <code>Link</code>
+     *         originates from.
+     * @param target
+     *         The {@link Resource} instance this <code>Link</code> points
+     *         to.
      */
-    public String getSummary() {
-        return summary;
+    public Link(Resource source, Resource target) {
+        this.source = source;
+        this.target = target;
     }
 
     /**
-     * Modifies the summarizing description of this resource.
+     * Returns the resource this link originates from.
      *
-     * @param summary
-     *         The new value for the summarizing description of this
-     *         resource.
+     * @return The resource this link originates from.
      */
-    public void setSummary(String summary) {
-        this.summary = summary;
+    public Resource getSource() {
+        return source;
     }
 
     /**
-     * Returns a set of currently associated links for this resource.
+     * Modifies the resource this link originates from.
      *
-     * @return A set of currently associated links for this resource.
+     * @param source
+     *         The new value for the resource this link originates from.
      */
-    public Set<Link> getLinks() {
-        return links;
+    public void setSource(Resource source) {
+        this.source = source;
     }
 
     /**
-     * Changes the set of currently associated links for this resource.
+     * Returns the resource this link points to.
      *
-     * @param links
-     *         The new set of currently associated links for this resource.
+     * @return The resource this link points to.
      */
-    public void setLinks(Set<Link> links) {
-        this.links = links;
+    public Resource getTarget() {
+        return target;
+    }
+
+    /**
+     * Modifies the resource this link points to.
+     *
+     * @param target
+     *         The new value for the resource this link points to.
+     */
+    public void setTarget(Resource target) {
+        this.target = target;
     }
 }

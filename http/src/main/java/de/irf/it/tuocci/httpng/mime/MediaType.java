@@ -17,7 +17,7 @@
 
 package de.irf.it.tuocci.httpng.mime;
 
-import de.irf.it.tuocci.core.api.Entity;
+import de.irf.it.tuocci.core.Entity;
 
 /**
  * TODO: not yet commented.

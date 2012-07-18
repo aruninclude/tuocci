@@ -36,7 +36,7 @@
 
 package de.irf.it.tuocci.infrastructure.network;
 
-import de.irf.it.tuocci.core.api.Link;
+import de.irf.it.tuocci.core.Link;
 import de.irf.it.tuocci.annotations.Attaches;
 import de.irf.it.tuocci.annotations.Attribute;
 import de.irf.it.tuocci.annotations.Category;

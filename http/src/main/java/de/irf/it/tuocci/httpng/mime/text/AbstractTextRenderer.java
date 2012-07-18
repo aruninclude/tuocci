@@ -21,8 +21,8 @@ package de.irf.it.tuocci.httpng.mime.text;
 
 import de.irf.it.tuocci.annotations.Attribute;
 import de.irf.it.tuocci.annotations.Category;
-import de.irf.it.tuocci.core.api.Entity;
-import de.irf.it.tuocci.core.api.Link;
+import de.irf.it.tuocci.core.Entity;
+import de.irf.it.tuocci.core.Link;
 import de.irf.it.tuocci.core.exceptions.AttributeAccessException;
 
 /**

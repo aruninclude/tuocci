@@ -22,7 +22,7 @@ package de.irf.it.tuocci.core.exceptions;
  * a class that does not indicate support for it.
  * <p/>
  * More specifically, if a <code>Mixin</code> instance is assigned using
- * {@link de.irf.it.tuocci.core.api.Entity#attachMixin(Object)},
+ * {@link de.irf.it.tuocci.core.Entity#attachMixin(Object)},
  * a check is performed whether the <code>Entity</code> instance (or the
  * corresponding sub-class of it) carries the {@link
  * de.irf.it.tuocci.annotations.Attaches} annotation with the value of

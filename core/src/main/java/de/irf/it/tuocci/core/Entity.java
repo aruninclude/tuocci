@@ -32,7 +32,7 @@
  *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.irf.it.tuocci.core.api;
+package de.irf.it.tuocci.core;
 
 import de.irf.it.tuocci.annotations.Action;
 import de.irf.it.tuocci.annotations.Attribute;
@@ -44,7 +44,6 @@ import de.irf.it.tuocci.core.exceptions.ActionTriggerException;
 import de.irf.it.tuocci.core.exceptions.AttributeAccessException;
 import de.irf.it.tuocci.core.exceptions.InvalidMixinException;
 import de.irf.it.tuocci.core.exceptions.UnsupportedMixinException;
-import de.irf.it.tuocci.core.model.Tag;
 
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
