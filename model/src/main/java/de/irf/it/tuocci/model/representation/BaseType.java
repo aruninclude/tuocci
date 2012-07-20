@@ -34,14 +34,9 @@
 
 // $Id$ //
 
-package de.irf.it.tuocci.infrastructure.network;
+package de.irf.it.tuocci.model.representation;
 
-import de.irf.it.tuocci.core.Link;
-import de.irf.it.tuocci.model.annotations.Attaches;
-import de.irf.it.tuocci.model.annotations.Attribute;
-import de.irf.it.tuocci.model.annotations.Category;
-import de.irf.it.tuocci.model.annotations.Kind;
-import de.irf.it.tuocci.infrastructure.compute.Compute;
+import de.irf.it.tuocci.model.ModelAware;
 
 /**
  * TODO: not yet commented.
@@ -50,46 +45,5 @@ import de.irf.it.tuocci.infrastructure.compute.Compute;
  *         Papaspyrou</a>
  * @version $Revision$ (as of $Date$)
  */
-@Category(term = "networkinterface", scheme = "http://schemas.ogf.org/occi/infrastructure#", title = "NetworkInterface Link")
-@Kind
-@Attaches(mixins = {IPNetworkInterface.class})
-public class NetworkInterface
-        extends Link {
-
-    @Attribute(name = "occi.networkinterface.interface")
-    private String interfaceName;
-
-    @Attribute(name = "occi.networkinterface.mac", mutable = true)
-    private String macAddress;
-
-    @Attribute(name = "occi.networkinterface.state")
-    private State state;
-
-    public NetworkInterface(Compute source, Network target) {
-        super(source, target);
-    }
-
-    public String getInterfaceName() {
-        return interfaceName;
-    }
-
-    public String getMacAddress() {
-        return macAddress;
-    }
-
-    public void setMacAddress(String macAddress) {
-        this.macAddress = macAddress;
-    }
-
-    public State getState() {
-        return state;
-    }
-
-    public enum State {
-
-        active(),
-
-        inactive()
-
-    }
+public class BaseType implements ModelAware {
 }

@@ -15,11 +15,7 @@
  *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-// $Id$ //
-
-package de.irf.it.tuocci.core;
-
-import de.irf.it.tuocci.model.annotations.Mixin;
+package de.irf.it.tuocci.model;
 
 /**
  * TODO: not yet commented.
@@ -28,36 +24,5 @@ import de.irf.it.tuocci.model.annotations.Mixin;
  *         Papaspyrou</a>
  * @version $Revision$ (as of $Date$)
  */
-@Mixin
-public class Tag {
-
-    private String term;
-
-    private String scheme;
-
-    private String title;
-
-    public String getTerm() {
-        return term;
-    }
-
-    public void setTerm(String term) {
-        this.term = term;
-    }
-
-    public String getScheme() {
-        return scheme;
-    }
-
-    public void setScheme(String scheme) {
-        this.scheme = scheme;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
+public interface ModelAware {
 }

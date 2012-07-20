@@ -37,10 +37,10 @@
 package de.irf.it.tuocci.infrastructure.storage;
 
 import de.irf.it.tuocci.core.Resource;
-import de.irf.it.tuocci.annotations.Action;
-import de.irf.it.tuocci.annotations.Attribute;
-import de.irf.it.tuocci.annotations.Category;
-import de.irf.it.tuocci.annotations.Kind;
+import de.irf.it.tuocci.model.annotations.Action;
+import de.irf.it.tuocci.model.annotations.Attribute;
+import de.irf.it.tuocci.model.annotations.Category;
+import de.irf.it.tuocci.model.annotations.Kind;
 
 /**
  * TODO: not yet commented.

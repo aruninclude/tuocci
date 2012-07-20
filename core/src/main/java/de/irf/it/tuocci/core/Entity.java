@@ -34,16 +34,17 @@
 
 package de.irf.it.tuocci.core;
 
-import de.irf.it.tuocci.annotations.Action;
-import de.irf.it.tuocci.annotations.Attribute;
-import de.irf.it.tuocci.annotations.Category;
-import de.irf.it.tuocci.annotations.Kind;
-import de.irf.it.tuocci.annotations.Mixin;
-import de.irf.it.tuocci.annotations.Attaches;
-import de.irf.it.tuocci.core.exceptions.ActionTriggerException;
-import de.irf.it.tuocci.core.exceptions.AttributeAccessException;
-import de.irf.it.tuocci.core.exceptions.InvalidMixinException;
-import de.irf.it.tuocci.core.exceptions.UnsupportedMixinException;
+import de.irf.it.tuocci.model.annotations.Action;
+import de.irf.it.tuocci.model.annotations.Attribute;
+import de.irf.it.tuocci.model.annotations.Category;
+import de.irf.it.tuocci.model.annotations.Kind;
+import de.irf.it.tuocci.model.annotations.Mixin;
+import de.irf.it.tuocci.model.annotations.Attaches;
+import de.irf.it.tuocci.model.exceptions.ActionTriggerException;
+import de.irf.it.tuocci.model.exceptions.AttributeAccessException;
+import de.irf.it.tuocci.model.exceptions.InvalidMixinException;
+import de.irf.it.tuocci.model.exceptions.UnsupportedMixinException;
+import de.irf.it.tuocci.model.representation.BaseType;
 
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
@@ -95,7 +96,7 @@ import java.util.UUID;
 @Category(term = "entity", scheme = "http://schemas.ogf.org/occi/core#", title = "Entity type")
 @Kind
 @Attaches(mixins = {Tag.class})
-public abstract class Entity {
+public abstract class Entity extends BaseType {
 
     /**
      * A unique identifier (within the service provider's namespace) of this
@@ -804,8 +805,8 @@ public abstract class Entity {
      * using the provided attribute values as arguments to it.
      * <p/>
      * More specifically, this method searches both the entity instance and all
-     * currently attached mixins for a method with an {@link de.irf.it.tuocci.annotations.Action} annotation
-     * of {@link de.irf.it.tuocci.annotations.Category} identified by the term/scheme combination as
+     * currently attached mixins for a method with an {@link de.irf.it.tuocci.model.annotations.Action} annotation
+     * of {@link de.irf.it.tuocci.model.annotations.Category} identified by the term/scheme combination as
      * provided
      * and, if found, invokes this method with the attribute values as its
      * arguments.

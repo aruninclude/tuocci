@@ -34,14 +34,22 @@
 
 // $Id$ //
 
-package de.irf.it.tuocci.infrastructure.network;
+package de.irf.it.tuocci.model;
 
-import de.irf.it.tuocci.core.Link;
-import de.irf.it.tuocci.model.annotations.Attaches;
-import de.irf.it.tuocci.model.annotations.Attribute;
-import de.irf.it.tuocci.model.annotations.Category;
-import de.irf.it.tuocci.model.annotations.Kind;
-import de.irf.it.tuocci.infrastructure.compute.Compute;
+import de.irf.it.tuocci.model.exceptions.ActionTriggerException;
+import de.irf.it.tuocci.model.exceptions.AttributeAccessException;
+import de.irf.it.tuocci.model.representation.Attribute;
+import de.irf.it.tuocci.model.representation.Category;
+import de.irf.it.tuocci.model.representation.ModelElement;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.ServiceLoader;
+import java.util.Set;
 
 /**
  * TODO: not yet commented.
@@ -50,46 +58,33 @@ import de.irf.it.tuocci.infrastructure.compute.Compute;
  *         Papaspyrou</a>
  * @version $Revision$ (as of $Date$)
  */
-@Category(term = "networkinterface", scheme = "http://schemas.ogf.org/occi/infrastructure#", title = "NetworkInterface Link")
-@Kind
-@Attaches(mixins = {IPNetworkInterface.class})
-public class NetworkInterface
-        extends Link {
+public class Registry {
 
-    @Attribute(name = "occi.networkinterface.interface")
-    private String interfaceName;
-
-    @Attribute(name = "occi.networkinterface.mac", mutable = true)
-    private String macAddress;
-
-    @Attribute(name = "occi.networkinterface.state")
-    private State state;
-
-    public NetworkInterface(Compute source, Network target) {
-        super(source, target);
+    private static Registry instance;
+    
+    public static Registry getInstance() {
+        if(instance == null) {
+            instance = new Registry();
+        } // if
+        return instance;
     }
 
-    public String getInterfaceName() {
-        return interfaceName;
+    private Set<ModelElement> modelElementSet;
+
+    public Registry() {
+        this.modelElementSet = new HashSet<ModelElement>();
+
+        for(ModelElement modelElementInfo : ServiceLoader.load(ModelElement.class)) {
+            this.modelElementSet.add(modelElementInfo);
+        } // for
     }
 
-    public String getMacAddress() {
-        return macAddress;
+    public ModelElement[] getRegisteredModelElements() {
+        return this.modelElementSet.toArray(new ModelElement[this.modelElementSet.size()]);
     }
 
-    public void setMacAddress(String macAddress) {
-        this.macAddress = macAddress;
-    }
-
-    public State getState() {
-        return state;
-    }
-
-    public enum State {
-
-        active(),
-
-        inactive()
-
+    public final void triggerAction(ModelAware target, Category actionCategory, Map<Attribute, String> actionParameters)
+            throws ActionTriggerException, AttributeAccessException {
+        
     }
 }

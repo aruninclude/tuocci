@@ -19,7 +19,7 @@
  * Provides implementations for the OCCI Core Model base resource types.
  * <p/>
  * The Open Cloud Cmputing Core Model (<i>"the model"</i>) defines a
- * representation of instance types which can be manipulated through an OCCI
+ * de.irf.it.tuocci.model of instance types which can be manipulated through an OCCI
  * rendering implementation. It is an abstraction of real-world resources,
  * including means to identify, classify, associate and extend those resources.
  * <p/>

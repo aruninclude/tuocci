@@ -39,7 +39,7 @@
     <dependencies>
         <dependency>
             <groupId>de.irf.it.tuocci</groupId>
-            <artifactId>tuocci-annotations</artifactId>
+            <artifactId>tuocci-model</artifactId>
             <version>0.4</version>
         </dependency>
         <dependency>

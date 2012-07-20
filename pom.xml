@@ -45,6 +45,7 @@
         <module>infrastructure</module>
         <module>annotations</module>
         <module>util</module>
+        <module>model</module>
     </modules>
 
     <!-- Build Settings -->

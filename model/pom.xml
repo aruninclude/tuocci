@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <!--
   ~ This file is part of tuOCCI.
   ~
@@ -17,17 +16,14 @@
   ~     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<!-- $Id$ -->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- The Basics -->
     <groupId>de.irf.it.tuocci</groupId>
-    <artifactId>tuocci-util</artifactId>
+    <artifactId>tuocci-model</artifactId>
     <version>0.4</version>
 
     <parent>
@@ -37,33 +33,12 @@
     </parent>
 
     <dependencies>
+        
         <dependency>
-            <groupId>de.irf.it.tuocci</groupId>
-            <artifactId>tuocci-model</artifactId>
-            <version>0.4</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.velocity</groupId>
-            <artifactId>velocity</artifactId>
-            <version>1.7</version>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.1</version>
         </dependency>
     </dependencies>
-
-    <!-- Build Settings -->
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <compilerArgument>-proc:none</compilerArgument>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
-
-    <!-- More Project Information -->
-    <name>tuOCCI Utilities</name>
-    <description>...</description>
 
 </project>
