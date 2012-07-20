@@ -15,7 +15,7 @@
  *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.irf.it.tuocci.annotations.util;
+package de.irf.it.tuocci.model.annotations.util;
 
 import de.irf.it.tuocci.model.annotations.Action;
 import de.irf.it.tuocci.model.annotations.Attribute;
@@ -62,7 +62,7 @@ import java.util.Set;
  *         Papaspyrou</a>
  * @version $Revision$ (as of $Date$)
  */
-@SupportedAnnotationTypes("de.irf.it.tuocci.annotations.Category")
+@SupportedAnnotationTypes("de.irf.it.tuocci.model.annotations.Category")
 @SupportedSourceVersion(SourceVersion.RELEASE_6)
 public class CategoryAnnotationProcessor
         extends AbstractProcessor {
@@ -79,19 +79,7 @@ public class CategoryAnnotationProcessor
     }
 
     private String generateActionModelInfoClassName(String enclosingTypeName, Category actionCategory) {
-        String result;
-
-        StringBuilder sb = new StringBuilder();
-        sb.append(enclosingTypeName);
-
-        char[] charArray = actionCategory.term().toCharArray();
-        charArray[0] = Character.toUpperCase(charArray[0]);
-        sb.append(charArray);
-        sb.append("Action");
-
-        result = sb.toString();
-
-        return result;
+        return String.format("%1$s%2$S%3$sAction", enclosingTypeName, actionCategory.term().charAt(0), actionCategory.term().substring(1));
     }
 
     private String extractOcciClass(Element element) {
@@ -183,7 +171,8 @@ public class CategoryAnnotationProcessor
         for (Element e : ElementFilter.methodsIn(element.getEnclosedElements())) {
             Action a = e.getAnnotation(Action.class);
             if (a != null) {
-                occiActions.add(generateActionModelInfoClassName(packageName + "." + className, e.getAnnotation(Category.class)));
+                String qualifiedClassName = String.format("%1$s.%2$s", packageName, className);
+                occiActions.add(generateActionModelInfoClassName(qualifiedClassName, e.getAnnotation(Category.class)));
             } // if
         } // for
 
@@ -237,10 +226,11 @@ public class CategoryAnnotationProcessor
         URL url = this.getClass().getClassLoader().getResource("velocity.properties");
         p.load(url.openStream());
 
-        VelocityEngine ve = new VelocityEngine(p);
-        ve.init();
+        VelocityEngine engine = new VelocityEngine(p);
+        engine.init();
 
-        Template vt = ve.getTemplate("templates/" + IMPLEMENTATION_CLASS_BASE_NAME + ".vm");
+        String templatePath = String.format("templates/%1$s.vm", IMPLEMENTATION_CLASS_BASE_NAME);
+        Template vt = engine.getTemplate(templatePath);
 
         int i = 0;
         for (VelocityContext vc : this.contextMap.values()) {
@@ -249,17 +239,17 @@ public class CategoryAnnotationProcessor
             /*
              * Create qualified type name and append to result list.
              */
-            String modelInfoImplClassName = vc.get("packageName") + "." + vc.get("elementName") + IMPLEMENTATION_CLASS_BASE_NAME;
+            String modelInfoImplClassName = String.format("%1$s.%2$s%3$s", vc.get("packageName"), vc.get("elementName"), IMPLEMENTATION_CLASS_BASE_NAME);
             result[i++] = modelInfoImplClassName;
             /*
              * Create Java source file.
              */
             JavaFileObject jfo = processingEnv.getFiler().createSourceFile(modelInfoImplClassName);
-            m.printMessage(Diagnostic.Kind.NOTE, "creating source file: " + jfo.toUri());
+            m.printMessage(Diagnostic.Kind.NOTE, String.format("creating source file: %1$s", jfo.toUri()));
 
             Writer w = jfo.openWriter();
 
-            m.printMessage(Diagnostic.Kind.NOTE, "applying template: " + vt.getName());
+            m.printMessage(Diagnostic.Kind.NOTE, String.format("applying template: %1$s", vt.getName()));
             vt.merge(vc, w);
 
             w.close();
@@ -310,14 +300,7 @@ public class CategoryAnnotationProcessor
                         this.prepareTemplateContextForActions(element);
                         break;
                     default:
-                        StringBuilder sb = new StringBuilder();
-                        sb.append("unexpected annotation ");
-                        sb.append("<").append(Category.class.getName()).append(">");
-                        sb.append(" on ").append(element.getSimpleName());
-
-
-
-                        String message = sb.toString();
+                        String message = String.format("unexpected annotation <%1$s> on %2$s", Category.class.getName(), element.getSimpleName());
                         processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, message);
                         throw new RuntimeException(message);
                 } // switch
@@ -330,12 +313,7 @@ public class CategoryAnnotationProcessor
                 this.writeServiceLoaderConfiguration(implementationClassNames);
             } // try
             catch (IOException e) {
-                StringBuilder sb = new StringBuilder();
-                sb.append("rendering of code to writer failed (message was '");
-                sb.append(e.getLocalizedMessage());
-                sb.append("')");
-
-                String message = sb.toString();
+                String message = String.format("rendering of code to writer failed (message was '%1$s')", e.getLocalizedMessage());
                 processingEnv.getMessager().printMessage(Diagnostic.Kind.ERROR, message);
                 throw new RuntimeException(message, e);
             } // catch

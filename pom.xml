@@ -40,12 +40,11 @@
     </dependencies>
 
     <modules>
-        <module>core</module>
-        <module>http</module>
-        <module>infrastructure</module>
-        <module>annotations</module>
-        <module>util</module>
         <module>model</module>
+        <module>core</module>
+        <module>infrastructure</module>
+        <module>http</module>
+        <module>util</module>
     </modules>
 
     <!-- Build Settings -->

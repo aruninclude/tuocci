@@ -19,27 +19,27 @@ package ${packageName};
 
 import de.irf.it.tuocci.model.representation.Attribute;
 import de.irf.it.tuocci.model.representation.Category;
-import de.irf.it.tuocci.model.representation.Model;
+import de.irf.it.tuocci.model.representation.ModelElement;
 
 import java.net.URI;
 
-public class ${elementName}ModelImpl implements Model {
+public class ${elementName}ModelElementImpl implements ModelElement {
 
-    private static Model instance;
+    private static ModelElement instance;
 
-    public static Model getInstance() {
+    public static ModelElement getInstance() {
         if(instance == null) {
-            instance = new ${elementName}ModelImpl();
+            instance = new ${elementName}ModelElementImpl();
         } // if
         return instance;
     }
 
     private Type modelType =
-        #if(${occiClass} == "de.irf.it.tuocci.annotations.Kind")
+        #if(${occiClass} == "de.irf.it.tuocci.model.annotations.Kind")
             Type.KIND;
-        #elseif(${occiClass} == "de.irf.it.tuocci.annotations.Mixin")
+        #elseif(${occiClass} == "de.irf.it.tuocci.model.annotations.Mixin")
             Type.MIXIN;
-        #elseif(${occiClass} == "de.irf.it.tuocci.annotations.Action")
+        #elseif(${occiClass} == "de.irf.it.tuocci.model.annotations.Action")
             Type.ACTION;
         #end
 
@@ -49,9 +49,9 @@ public class ${elementName}ModelImpl implements Model {
             "${occiCategory.title()}"
     );
 
-    private final Model[] related = new Model[]{
+    private final ModelElement[] related = new ModelElement[]{
     #foreach(${r} in ${occiRelated})
-        ${r}ModelImpl.getInstance()#if(${velocityHasNext}),#end
+        ${r}ModelElementImpl.getInstance()#if(${velocityHasNext}),#end
     #end
     };
 
@@ -61,9 +61,9 @@ public class ${elementName}ModelImpl implements Model {
     #end
     };
 
-    private final Model[] actions = {
+    private final ModelElement[] actions = {
     #foreach(${a} in ${occiActions})
-        ${a}ModelImpl.getInstance()#if(${velocityHasNext}),#end
+        ${a}ModelElementImpl.getInstance()#if(${velocityHasNext}),#end
     #end
     };
 
@@ -78,7 +78,7 @@ public class ${elementName}ModelImpl implements Model {
     }
 
     @Override
-    public Model[] getRelated() {
+    public ModelElement[] getRelated() {
         return this.related;
     }
 
@@ -88,7 +88,7 @@ public class ${elementName}ModelImpl implements Model {
     }
 
     @Override
-    public Model[] getActions() {
+    public ModelElement[] getActions() {
         return this.actions;
     }
 }
