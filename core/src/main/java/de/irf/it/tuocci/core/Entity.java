@@ -32,14 +32,31 @@
  *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*
+ * This file is part of tuOCCI.
+ *
+ *     tuOCCI is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU Lesser General Public License as
+ *     published by the Free Software Foundation, either version 3 of
+ *     the License, or (at your option) any later version.
+ *
+ *     tuOCCI is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU Lesser General Public License for more details.
+ *
+ *     You should have received a copy of the GNU Lesser General Public
+ *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package de.irf.it.tuocci.core;
 
 import de.irf.it.tuocci.model.annotations.Action;
+import de.irf.it.tuocci.model.annotations.Attaches;
 import de.irf.it.tuocci.model.annotations.Attribute;
 import de.irf.it.tuocci.model.annotations.Category;
 import de.irf.it.tuocci.model.annotations.Kind;
 import de.irf.it.tuocci.model.annotations.Mixin;
-import de.irf.it.tuocci.model.annotations.Attaches;
 import de.irf.it.tuocci.model.exceptions.ActionTriggerException;
 import de.irf.it.tuocci.model.exceptions.AttributeAccessException;
 import de.irf.it.tuocci.model.exceptions.InvalidMixinException;
@@ -96,7 +113,8 @@ import java.util.UUID;
 @Category(term = "entity", scheme = "http://schemas.ogf.org/occi/core#", title = "Entity type")
 @Kind
 @Attaches(mixins = {Tag.class})
-public abstract class Entity extends BaseType {
+public abstract class Entity
+        extends BaseType {
 
     /**
      * A unique identifier (within the service provider's namespace) of this
@@ -446,9 +464,9 @@ public abstract class Entity extends BaseType {
      */
     public final String getAttributeValue(String name)
             throws AttributeAccessException {
-        String result = null;
+        String result;
 
-        Method getter = null;
+        Method getter;
         Object target = null;
 
         /*
@@ -478,39 +496,22 @@ public abstract class Entity extends BaseType {
          */
         if (f != null) {
             getter = this.retrieveAttributeGetterSetter(f, true);
-            Object o = null;
+            Object o;
             try {
                 o = getter.invoke(target);
             } // try
             catch (IllegalAccessException e) {
-                String message = new StringBuffer("retrieval of '")
-                        .append(name)
-                        .append("' attribute on ")
-                        .append(target)
-                        .append(" failed: corresponding getter not available or not public")
-                        .toString();
+                String message = String.format("retrieval of '%1$s' attribute on %2$s failed: corresponding getter not available or not public", name, target);
                 throw new AttributeAccessException(message, e);
             } // catch
             catch (InvocationTargetException e) {
-                String message = new StringBuffer("retrieval of '")
-                        .append(name)
-                        .append("' attribute on ")
-                        .append(target)
-                        .append("' failed: underlying getter raised an exception (")
-                        .append(e.getMessage())
-                        .append(")")
-                        .toString();
+                String message = String.format("retrieval of '%1$s' attribute on %2$s failed: underlying getter raised an exception (message was '%3$s')", name, target, e.getLocalizedMessage());
                 throw new AttributeAccessException(message, e);
             } // catch
             result = o.toString();
         } // if
         else {
-            String message = new StringBuffer("retrieval of '")
-                    .append(name)
-                    .append("' attribute on ")
-                    .append(target)
-                    .append("' failed: no corresponding field found ")
-                    .toString();
+            String message = String.format("retrieval of '%1$s' attribute on %2$s failed: no corresponding field found", name, target);
             throw new AttributeAccessException(message);
         } // else
 
@@ -569,14 +570,7 @@ public abstract class Entity extends BaseType {
 
             Object o = this.instanceFromString(f.getDeclaringClass(), value);
             if (o == null) {
-                String message = new StringBuffer("modification of '")
-                        .append(name)
-                        .append("' attribute on ")
-                        .append(target)
-                        .append("' failed: no single argument constructor, 'fromString', or 'valueOf' method for conversion to ")
-                        .append(f.getDeclaringClass())
-                        .append(" found")
-                        .toString();
+                String message = String.format("modification of '%1$s' attribute on %2$s failed: no single argument constructor, 'fromString', or 'valueOf' method for conversion to %3$s  found", name, target, f.getDeclaringClass());
                 throw new AttributeAccessException(message);
             } //
 
@@ -584,33 +578,16 @@ public abstract class Entity extends BaseType {
                 setter.invoke(target, o);
             }  // try
             catch (IllegalAccessException e) {
-                String message = new StringBuffer("modification of '")
-                        .append(name)
-                        .append("' attribute on ")
-                        .append(target)
-                        .append("' failed: corresponding setter not available or not public")
-                        .toString();
+                String message = String.format("modification of '%1$s' attribute on %2$s failed: corresponding setter not available or not public", name, target);
                 throw new AttributeAccessException(message, e);
             } // catch
             catch (InvocationTargetException e) {
-                String message = new StringBuffer("modification of '")
-                        .append(name)
-                        .append("' attribute on ")
-                        .append(target)
-                        .append("' failed: underlying setter raised an exception (")
-                        .append(e.getMessage())
-                        .append(")")
-                        .toString();
+                String message = String.format("modification of '%1$s' attribute on %2$s failed: underlying setter raised an exception (message was '%3$s')", name, target, e.getLocalizedMessage());
                 throw new AttributeAccessException(message, e);
             } // catch
         } // if
         else {
-            String message = new StringBuffer("manipulation of '")
-                    .append(name)
-                    .append("' attribute on ")
-                    .append(target)
-                    .append("' failed: no corresponding field found")
-                    .toString();
+            String message = String.format("manipulation of '%1$s' attribute on %2$s failed: no corresponding field found", name, target);
             throw new AttributeAccessException(message);
         } // else
     }
@@ -770,43 +747,15 @@ public abstract class Entity extends BaseType {
         return result;
     }
 
-    public final Set<Action> listActions() {
-        Set<Action> result = new HashSet<Action>();
-
-        /*
-         * Search on this entity, climbing up the class hierarchy.
-         */
-        Class<?> self = this.getClass();
-        while (!Object.class.equals(self)) {
-            for (Method m : self.getClass().getDeclaredMethods()) {
-                if (m.isAnnotationPresent(Action.class)) {
-                    result.add(m.getAnnotation(Action.class));
-                } // if
-            } // for
-            self = self.getSuperclass();
-        } // while
-
-        /*
-         * Search on all mixins.
-         */
-        for (Object o : this.getMixins()) {
-            for (Method m : o.getClass().getDeclaredMethods()) {
-                if (m.isAnnotationPresent(Action.class)) {
-                    result.add(m.getAnnotation(Action.class));
-                } // if
-            } // for
-        } // for
-
-        return result;
-    }
-
     /**
      * Triggers the action identified by the provided term/scheme combination,
      * using the provided attribute values as arguments to it.
      * <p/>
      * More specifically, this method searches both the entity instance and all
-     * currently attached mixins for a method with an {@link de.irf.it.tuocci.model.annotations.Action} annotation
-     * of {@link de.irf.it.tuocci.model.annotations.Category} identified by the term/scheme combination as
+     * currently attached mixins for a method with an {@link
+     * de.irf.it.tuocci.model.annotations.Action} annotation
+     * of {@link de.irf.it.tuocci.model.annotations.Category} identified by the
+     * term/scheme combination as
      * provided
      * and, if found, invokes this method with the attribute values as its
      * arguments.
