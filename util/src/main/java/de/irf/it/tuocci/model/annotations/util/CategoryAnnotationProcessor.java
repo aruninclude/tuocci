@@ -234,7 +234,7 @@ public class CategoryAnnotationProcessor
 
         int i = 0;
         for (VelocityContext vc : this.contextMap.values()) {
-            Messager m = processingEnv.getMessager();
+            vc.put("baseName", IMPLEMENTATION_CLASS_BASE_NAME);
 
             /*
              * Create qualified type name and append to result list.
@@ -245,11 +245,7 @@ public class CategoryAnnotationProcessor
              * Create Java source file.
              */
             JavaFileObject jfo = processingEnv.getFiler().createSourceFile(modelInfoImplClassName);
-            m.printMessage(Diagnostic.Kind.NOTE, String.format("creating source file: %1$s", jfo.toUri()));
-
             Writer w = jfo.openWriter();
-
-            m.printMessage(Diagnostic.Kind.NOTE, String.format("applying template: %1$s", vt.getName()));
             vt.merge(vc, w);
 
             w.close();

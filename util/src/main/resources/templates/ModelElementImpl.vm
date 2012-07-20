@@ -23,23 +23,26 @@ import de.irf.it.tuocci.model.representation.ModelElement;
 
 import java.net.URI;
 
-public class ${elementName}ModelElementImpl implements ModelElement {
+#set($occiKind = "de.irf.it.tuocci.model.annotations.Kind")
+#set($occiMixin = "de.irf.it.tuocci.model.annotations.Mixin")
+#set($occiAction = "de.irf.it.tuocci.model.annotations.Action")
+public class ${elementName}${baseName} implements ModelElement {
 
     private static ModelElement instance;
 
     public static ModelElement getInstance() {
         if(instance == null) {
-            instance = new ${elementName}ModelElementImpl();
+            instance = new ${elementName}${baseName}();
         } // if
         return instance;
     }
 
     private Type modelType =
-        #if(${occiClass} == "de.irf.it.tuocci.model.annotations.Kind")
+        #if(${occiClass} == ${occiKind})
             Type.KIND;
-        #elseif(${occiClass} == "de.irf.it.tuocci.model.annotations.Mixin")
+        #elseif(${occiClass} == ${occiMixin})
             Type.MIXIN;
-        #elseif(${occiClass} == "de.irf.it.tuocci.model.annotations.Action")
+        #elseif(${occiClass} == ${occiAction})
             Type.ACTION;
         #end
 
@@ -51,7 +54,7 @@ public class ${elementName}ModelElementImpl implements ModelElement {
 
     private final ModelElement[] related = new ModelElement[]{
     #foreach(${r} in ${occiRelated})
-        ${r}ModelElementImpl.getInstance()#if(${velocityHasNext}),#end
+        ${r}${baseName}.getInstance()#if(${velocityHasNext}),#end
     #end
     };
 
@@ -63,7 +66,7 @@ public class ${elementName}ModelElementImpl implements ModelElement {
 
     private final ModelElement[] actions = {
     #foreach(${a} in ${occiActions})
-        ${a}ModelElementImpl.getInstance()#if(${velocityHasNext}),#end
+        ${a}${baseName}.getInstance()#if(${velocityHasNext}),#end
     #end
     };
 
