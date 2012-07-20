@@ -58,7 +58,7 @@
                     <configuration>
                         <source>${tuocci.java.version}</source>
                         <target>${tuocci.java.version}</target>
-                        <verbose>true</verbose>
+                        <showWarnings>true</showWarnings>
                     </configuration>
                 </plugin>
                 <plugin>
