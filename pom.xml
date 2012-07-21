@@ -17,8 +17,6 @@
   ~     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<!-- $Id$ -->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -33,6 +31,7 @@
 
     <properties>
         <tuocci.java.version>1.6</tuocci.java.version>
+        <tuocci.aspectj.version>1.6.12</tuocci.aspectj.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     
@@ -60,6 +59,18 @@
                         <target>${tuocci.java.version}</target>
                         <showWarnings>true</showWarnings>
                     </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>aspectj-maven-plugin</artifactId>
+                    <version>1.4</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>compile</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>

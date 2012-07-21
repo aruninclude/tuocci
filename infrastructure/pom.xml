@@ -16,8 +16,6 @@
   ~     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<!-- $Id$ -->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -48,25 +46,6 @@
             <scope>compile</scope>
         </dependency>
     </dependencies>
-
-    <!-- Build Settings -->
-    <build>
-        <plugins>
-            <!--plugin>
-                <groupId>org.antlr</groupId>
-                <artifactId>antlr3-maven-plugin</artifactId>
-                <version>3.3</version>
-                <executions>
-                    <execution>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>antlr</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin-->
-        </plugins>
-    </build>
 
     <!-- More Project Information -->
     <name>tuOCCI Infrastructure Model Implementation</name>
