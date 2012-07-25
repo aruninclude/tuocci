@@ -66,14 +66,27 @@
  *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*
+ * This file is part of tuOCCI.
+ *
+ *     tuOCCI is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU Lesser General Public License as
+ *     published by the Free Software Foundation, either version 3 of
+ *     the License, or (at your option) any later version.
+ *
+ *     tuOCCI is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU Lesser General Public License for more details.
+ *
+ *     You should have received a copy of the GNU Lesser General Public
+ *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 // $Id$ //
 
 package de.irf.it.tuocci.model;
 
-import de.irf.it.tuocci.model.exceptions.ActionTriggerException;
-import de.irf.it.tuocci.model.exceptions.AttributeAccessException;
-import de.irf.it.tuocci.model.representation.Attribute;
-import de.irf.it.tuocci.model.representation.Category;
 import de.irf.it.tuocci.model.representation.Element;
 
 import java.util.HashMap;
@@ -132,10 +145,5 @@ public class Registry {
         result = this.classToElementMap.get(c1ass);
 
         return result;
-    }
-
-    public final void triggerAction(Queryable target, Category actionCategory, Map<Attribute, String> actionParameters)
-            throws ActionTriggerException, AttributeAccessException {
-
     }
 }

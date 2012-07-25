@@ -15,6 +15,23 @@
  *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*
+ * This file is part of tuOCCI.
+ *
+ *     tuOCCI is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU Lesser General Public License as
+ *     published by the Free Software Foundation, either version 3 of
+ *     the License, or (at your option) any later version.
+ *
+ *     tuOCCI is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU Lesser General Public License for more details.
+ *
+ *     You should have received a copy of the GNU Lesser General Public
+ *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 // $Id$ //
 
 package de.irf.it.tuocci.model.representation;
@@ -46,9 +63,14 @@ public class Attribute {
     }
 
     public Attribute(String name, boolean required, boolean mutable) {
+        this();
         this.name = name;
         this.required = required;
         this.mutable = mutable;
+    }
+
+    public boolean matchAnnotation(de.irf.it.tuocci.model.annotations.Attribute annotation) {
+        return annotation.name().equals(this.name);
     }
 
     public String getName() {
@@ -74,7 +96,7 @@ public class Attribute {
     public void setMutable(boolean mutable) {
         this.mutable = mutable;
     }
-    
+
     @Override
     public boolean equals(Object other) {
         boolean result;
@@ -96,5 +118,5 @@ public class Attribute {
     @Override
     public int hashCode() {
         return new HashCodeBuilder().append(this.name).toHashCode();
-    }    
+    }
 }
