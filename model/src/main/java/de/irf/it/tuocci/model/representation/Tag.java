@@ -32,12 +32,9 @@
  *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+// $Id$ //
+
 package de.irf.it.tuocci.model.representation;
-
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
-import java.net.URI;
 
 /**
  * TODO: not yet commented.
@@ -46,72 +43,44 @@ import java.net.URI;
  *         Papaspyrou</a>
  * @version $Revision$ (as of $Date$)
  */
-public class Category {
+public class Tag
+        extends Category
+        implements Element {
 
-    private URI scheme;
+    public static final Tag INSTANCE = new Tag();
 
-    private String term;
-
-    private String title;
-
-    public Category() {
-        super();
-    }
-
-    public Category(URI scheme, String term, String title) {
-        this.scheme = scheme;
-        this.term = term;
-        this.title = title;
-    }
-
+    @Override
     public boolean matchAnnotation(de.irf.it.tuocci.model.annotations.Category annotation) {
-        return annotation.scheme().equals(this.scheme) && annotation.term().equals(this.term);
-    }
-
-    public URI getScheme() {
-        return scheme;
-    }
-
-    public void setScheme(URI scheme) {
-        this.scheme = scheme;
-    }
-
-    public String getTerm() {
-        return term;
-    }
-
-    public void setTerm(String term) {
-        this.term = term;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
+        return false;
     }
 
     @Override
-    public boolean equals(Object other) {
-        boolean result;
-
-        if (this == other) {
-            result = true;
-        } // if
-        else if (other == null || getClass() != other.getClass()) {
-            result = false;
-        } // else if
-        else {
-            Category candidate = (Category) other;
-            result = new EqualsBuilder().append(this.scheme, candidate.scheme).append(this.term, candidate.term).isEquals();
-        } // else
-
-        return result;
+    public Type getType() {
+        return Type.TAG;
     }
 
     @Override
-    public int hashCode() {
-        return new HashCodeBuilder().append(this.scheme).append(this.term).toHashCode();
+    public Category getCategory() {
+        return this;
+    }
+
+    @Override
+    public Element[] getRelated() {
+        return new Element[0];
+    }
+
+    @Override
+    public Element[] getAttaches() {
+        return new Element[0];
+    }
+
+    @Override
+    public Attribute[] getAttributes() {
+        return new Attribute[0];
+    }
+
+    @Override
+    public Element[] getActions() {
+        return new Element[0];
     }
 }

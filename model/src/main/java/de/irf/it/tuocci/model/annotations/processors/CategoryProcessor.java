@@ -15,9 +15,27 @@
  *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package de.irf.it.tuocci.model.annotations.util;
+/*
+ * This file is part of tuOCCI.
+ *
+ *     tuOCCI is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU Lesser General Public License as
+ *     published by the Free Software Foundation, either version 3 of
+ *     the License, or (at your option) any later version.
+ *
+ *     tuOCCI is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU Lesser General Public License for more details.
+ *
+ *     You should have received a copy of the GNU Lesser General Public
+ *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+package de.irf.it.tuocci.model.annotations.processors;
 
 import de.irf.it.tuocci.model.annotations.Action;
+import de.irf.it.tuocci.model.annotations.Attaches;
 import de.irf.it.tuocci.model.annotations.Attribute;
 import de.irf.it.tuocci.model.annotations.Category;
 import de.irf.it.tuocci.model.annotations.Kind;
@@ -27,12 +45,14 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.VelocityEngine;
 
 import javax.annotation.processing.AbstractProcessor;
-import javax.annotation.processing.Messager;
 import javax.annotation.processing.RoundEnvironment;
 import javax.annotation.processing.SupportedAnnotationTypes;
 import javax.annotation.processing.SupportedSourceVersion;
 import javax.lang.model.SourceVersion;
+import javax.lang.model.element.AnnotationMirror;
+import javax.lang.model.element.AnnotationValue;
 import javax.lang.model.element.Element;
+import javax.lang.model.element.ExecutableElement;
 import javax.lang.model.element.TypeElement;
 import javax.lang.model.type.TypeMirror;
 import javax.lang.model.util.ElementFilter;
@@ -49,8 +69,8 @@ import java.lang.annotation.Annotation;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Formatter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
@@ -64,16 +84,16 @@ import java.util.Set;
  */
 @SupportedAnnotationTypes("de.irf.it.tuocci.model.annotations.Category")
 @SupportedSourceVersion(SourceVersion.RELEASE_6)
-public class CategoryAnnotationProcessor
+public class CategoryProcessor
         extends AbstractProcessor {
 
-    private static final String SERVICE_LOADER_FILE = "META-INF/services/de.irf.it.tuocci.model.ModelElement";
+    private static final String SERVICE_LOADER_FILE = "META-INF/services/de.irf.it.tuocci.model.representation.Element";
 
-    private static final String IMPLEMENTATION_CLASS_BASE_NAME = "ModelElementImpl";
+    private static final String IMPLEMENTATION_CLASS_BASE_NAME = "ElementImpl";
 
     private Map<Element, VelocityContext> contextMap;
 
-    public CategoryAnnotationProcessor() {
+    public CategoryProcessor() {
         super();
         this.contextMap = new HashMap<Element, VelocityContext>();
     }
@@ -142,13 +162,16 @@ public class CategoryAnnotationProcessor
          */
         vc.put("occiClass", this.extractOcciClass(element));
 
+        TypeElement self;
+        TypeMirror object;
         /*
          * Extract OCCI related categories.
          */
         Collection<String> occiRelated = new ArrayList<String>();
 
-        TypeElement self = (TypeElement) element;
-        TypeMirror object = eUtils.getTypeElement("java.lang.Object").asType();
+        self = (TypeElement) element;
+        object = eUtils.getTypeElement("java.lang.Object").asType();
+
         while (!tUtils.isSameType(self.asType(), object)) {
             if (!tUtils.isSameType(self.asType(), element.asType()) && self.getAnnotation(Kind.class) != null || self.getAnnotation(Mixin.class) != null) {
                 occiRelated.add(self.getQualifiedName().toString());
@@ -157,6 +180,32 @@ public class CategoryAnnotationProcessor
         } // while
 
         vc.put("occiRelated", occiRelated);
+
+        /*
+         * Extract OCCI attachable mixins.
+         */
+        Collection<String> occiAttaches = new ArrayList<String>();
+
+        self = (TypeElement) element;
+        object = eUtils.getTypeElement("java.lang.Object").asType();
+        String attachesName = Attaches.class.getName();
+
+        while (!tUtils.isSameType(self.asType(), object)) {
+            for (AnnotationMirror am : self.getAnnotationMirrors()) {
+                if (attachesName.equals(am.getAnnotationType().toString())) {
+                    for (Map.Entry<? extends ExecutableElement, ? extends AnnotationValue> entry : am.getElementValues().entrySet()) {
+                        if ("mixins".equals(entry.getKey().getSimpleName().toString())) {
+                            for (AnnotationValue av : (List<AnnotationValue>) entry.getValue().getValue()) {
+                                occiAttaches.add(av.getValue().toString());
+                            } // for
+                        } // if
+                    } // for
+                } // if
+            } // for
+            self = (TypeElement) tUtils.asElement(self.getSuperclass());
+        } // while
+
+        vc.put("occiAttaches", occiAttaches);
 
         /*
          * Extract OCCI attributes.
@@ -254,11 +303,12 @@ public class CategoryAnnotationProcessor
         return result;
     }
 
-    private void writeServiceLoaderConfiguration(String[] implementationClassNames) throws IOException {
+    private void writeServiceLoaderConfiguration(String[] implementationClassNames)
+            throws IOException {
         FileObject fo = processingEnv.getFiler().createResource(StandardLocation.SOURCE_OUTPUT, "", SERVICE_LOADER_FILE);
         PrintWriter pw = new PrintWriter(fo.openWriter());
 
-        for(String icn : implementationClassNames) {
+        for (String icn : implementationClassNames) {
             pw.println(icn);
         } // for
 

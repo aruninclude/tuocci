@@ -1,0 +1,118 @@
+/*
+ * This file is part of tuOCCI.
+ *
+ *     tuOCCI is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU Lesser General Public License as
+ *     published by the Free Software Foundation, either version 3 of
+ *     the License, or (at your option) any later version.
+ *
+ *     tuOCCI is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU Lesser General Public License for more details.
+ *
+ *     You should have received a copy of the GNU Lesser General Public
+ *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+package ${packageName};
+
+import de.irf.it.tuocci.model.representation.Attribute;
+import de.irf.it.tuocci.model.representation.Category;
+import de.irf.it.tuocci.model.representation.Element;
+
+import java.net.URI;
+
+#set($occiKind = "de.irf.it.tuocci.model.annotations.Kind")
+#set($occiMixin = "de.irf.it.tuocci.model.annotations.Mixin")
+#set($occiAction = "de.irf.it.tuocci.model.annotations.Action")
+#set($occiTag = "de.irf.it.tuocci.model.representation.Tag")
+public class ${elementName}${baseName} implements Element{
+
+private static Element instance;
+
+public static Element getInstance(){
+        if(instance==null){
+        instance=new ${elementName}${baseName}();
+} // if
+        return instance;
+}
+
+private Type type= #if(${occiClass} == ${occiKind})Type.KIND;#elseif(${occiClass} == ${occiMixin})Type.MIXIN;#elseif(${occiClass} == ${occiAction})Type.ACTION;#end
+
+//    private final Class<? extends Queryable> implementingClass = ${elementName}.class;
+
+private final Category category=new Category(URI.create("${occiCategory.scheme()}"),"${occiCategory.term()}","${occiCategory.title()}");
+
+private final Element[]related=new Element[]{
+    #foreach(${r} in ${occiRelated})
+        ${r}${baseName}.getInstance()#if(${velocityHasNext}),
+    #end
+    #end
+
+        };
+
+private final Element[]attaches=new Element[]{
+    #foreach(${r} in ${occiAttaches})
+        #if(${r} == ${occiTag})
+            ${r}.INSTANCE#if(${velocityHasNext}),
+        #end
+        #else
+            ${r}${baseName}#if(${velocityHasNext}),
+        #end
+        #end
+    #end
+
+        };
+
+private final Attribute[]attributes={
+    #foreach(${a} in ${occiAttributes})
+            new Attribute("${a.name()}", ${a.required()}, ${a.mutable()})#if(${velocityHasNext}),
+    #end
+    #end
+
+        };
+
+private final Element[]actions={
+    #foreach(${a} in ${occiActions})
+        ${a}${baseName}.getInstance()#if(${velocityHasNext}),
+    #end
+    #end
+
+        };
+
+@Override
+public Type getType(){
+        return this.type;
+}
+
+//    @Override
+//    public Class<? extends Queryable> getImplementingClass() {
+//        return this.implementingClass;
+//    }
+
+@Override
+public Category getCategory(){
+        return this.category;
+}
+
+@Override
+public Element[]getRelated(){
+        return this.related;
+}
+
+@Override
+public Element[]getAttaches(){
+        return this.attaches;
+}
+
+@Override
+public Attribute[]getAttributes(){
+        return this.attributes;
+}
+
+@Override
+public Element[]getActions(){
+        return this.actions;
+}
+        }

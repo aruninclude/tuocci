@@ -49,6 +49,23 @@
  *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*
+ * This file is part of tuOCCI.
+ *
+ *     tuOCCI is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU Lesser General Public License as
+ *     published by the Free Software Foundation, either version 3 of
+ *     the License, or (at your option) any later version.
+ *
+ *     tuOCCI is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU Lesser General Public License for more details.
+ *
+ *     You should have received a copy of the GNU Lesser General Public
+ *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 // $Id$ //
 
 package de.irf.it.tuocci.model;
@@ -57,8 +74,9 @@ import de.irf.it.tuocci.model.exceptions.ActionTriggerException;
 import de.irf.it.tuocci.model.exceptions.AttributeAccessException;
 import de.irf.it.tuocci.model.representation.Attribute;
 import de.irf.it.tuocci.model.representation.Category;
-import de.irf.it.tuocci.model.representation.ModelElement;
+import de.irf.it.tuocci.model.representation.Element;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.ServiceLoader;
@@ -82,20 +100,41 @@ public class Registry {
         return instance;
     }
 
-    private Set<ModelElement> modelElementSet;
+    private Set<Element> elementSet;
+
+    private Map<Class<?>, Element> classToElementMap;
 
     public Registry() {
-        this.modelElementSet = new HashSet<ModelElement>();
-        for (ModelElement modelElementInfo : ServiceLoader.load(ModelElement.class)) {
-            this.modelElementSet.add(modelElementInfo);
+        this.elementSet = new HashSet<Element>();
+        this.classToElementMap = new HashMap<Class<?>, Element>();
+
+        for (Element modelElementInfo : ServiceLoader.load(Element.class)) {
+            this.elementSet.add(modelElementInfo);
         } // for
     }
 
-    public ModelElement[] getRegisteredModelElements() {
-        return this.modelElementSet.toArray(new ModelElement[this.modelElementSet.size()]);
+    public Element[] getRegisteredModelElements() {
+        return this.elementSet.toArray(new Element[this.elementSet.size()]);
     }
 
-    public final void triggerAction(ModelAware target, Category actionCategory, Map<Attribute, String> actionParameters)
+    public Element findElementForClass(Class<?> c1ass) {
+        Element result;
+
+        if (!this.classToElementMap.containsKey(c1ass)) {
+            de.irf.it.tuocci.model.annotations.Category a = c1ass.getAnnotation(de.irf.it.tuocci.model.annotations.Category.class);
+            for (Element e : this.elementSet) {
+                if (e.getCategory().matchAnnotation(a)) {
+                    this.classToElementMap.put(c1ass, e);
+                    break;
+                } // if
+            } // if
+        } // if
+        result = this.classToElementMap.get(c1ass);
+
+        return result;
+    }
+
+    public final void triggerAction(Queryable target, Category actionCategory, Map<Attribute, String> actionParameters)
             throws ActionTriggerException, AttributeAccessException {
 
     }
