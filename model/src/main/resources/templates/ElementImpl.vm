@@ -29,90 +29,90 @@ import java.net.URI;
 #set($occiTag = "de.irf.it.tuocci.model.representation.Tag")
 public class ${elementName}${baseName} implements Element{
 
-private static Element instance;
+    private static Element instance;
 
-public static Element getInstance(){
+    public static Element getInstance(){
         if(instance==null){
-        instance=new ${elementName}${baseName}();
-} // if
+            instance=new ${elementName}${baseName}();
+        } // if
         return instance;
-}
+    }
 
-private Type type= #if(${occiClass} == ${occiKind})Type.KIND;#elseif(${occiClass} == ${occiMixin})Type.MIXIN;#elseif(${occiClass} == ${occiAction})Type.ACTION;#end
+    private final Type type= #if(${occiClass} == ${occiKind})Type.KIND;#elseif(${occiClass} == ${occiMixin})Type.MIXIN;#elseif(${occiClass} == ${occiAction})Type.ACTION;#end
 
 //    private final Class<? extends Queryable> implementingClass = ${elementName}.class;
 
-private final Category category=new Category(URI.create("${occiCategory.scheme()}"),"${occiCategory.term()}","${occiCategory.title()}");
+    private final Category category=new Category(URI.create("${occiCategory.scheme()}"),"${occiCategory.term()}","${occiCategory.title()}");
 
-private final Element[]related=new Element[]{
+    private final Element[]related=new Element[]{
     #foreach(${r} in ${occiRelated})
         ${r}${baseName}.getInstance()#if(${velocityHasNext}),
-    #end
-    #end
-
-        };
-
-private final Element[]attaches=new Element[]{
-    #foreach(${r} in ${occiAttaches})
-        #if(${r} == ${occiTag})
-            ${r}.INSTANCE#if(${velocityHasNext}),
-        #end
-        #else
-            ${r}${baseName}#if(${velocityHasNext}),
-        #end
-        #end
+#end
     #end
 
-        };
+    };
 
-private final Attribute[]attributes={
-    #foreach(${a} in ${occiAttributes})
-            new Attribute("${a.name()}", ${a.required()}, ${a.mutable()})#if(${velocityHasNext}),
+    private final Element[]attaches=new Element[]{
+#foreach(${r} in ${occiAttaches})
+    #if(${r} == ${occiTag})
+        ${r}.INSTANCE#if(${velocityHasNext}),
+#end
+    #else
+        ${r}${baseName}.getInstance()#if(${velocityHasNext}),
     #end
-    #end
-
-        };
-
-private final Element[]actions={
-    #foreach(${a} in ${occiActions})
-        ${a}${baseName}.getInstance()#if(${velocityHasNext}),
-    #end
+#end
     #end
 
-        };
+    };
 
-@Override
-public Type getType(){
-        return this.type;
+    private final Attribute[]attributes={
+#foreach(${a} in ${occiAttributes})
+        new Attribute("${a.name()}", ${a.required()}, ${a.mutable()})#if(${velocityHasNext}),
+#end
+    #end
+
+    };
+
+    private final Element[]actions={
+#foreach(${a} in ${occiActions})
+    ${a}${baseName}.getInstance()#if(${velocityHasNext}),
+#end
+    #end
+
+    };
+
+    @Override
+    public Type getType(){
+            return this.type;
+    }
+
+    //    @Override
+    //    public Class<? extends Queryable> getImplementingClass() {
+    //        return this.implementingClass;
+    //    }
+
+    @Override
+    public Category getCategory(){
+            return this.category;
+    }
+
+    @Override
+    public Element[]getRelated(){
+            return this.related;
+    }
+
+    @Override
+    public Element[]getAttaches(){
+            return this.attaches;
+    }
+
+    @Override
+    public Attribute[]getAttributes(){
+            return this.attributes;
+    }
+
+    @Override
+    public Element[]getActions(){
+            return this.actions;
+    }
 }
-
-//    @Override
-//    public Class<? extends Queryable> getImplementingClass() {
-//        return this.implementingClass;
-//    }
-
-@Override
-public Category getCategory(){
-        return this.category;
-}
-
-@Override
-public Element[]getRelated(){
-        return this.related;
-}
-
-@Override
-public Element[]getAttaches(){
-        return this.attaches;
-}
-
-@Override
-public Attribute[]getAttributes(){
-        return this.attributes;
-}
-
-@Override
-public Element[]getActions(){
-        return this.actions;
-}
-        }
