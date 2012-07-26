@@ -66,6 +66,23 @@
  *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*
+ * This file is part of tuOCCI.
+ *
+ *     tuOCCI is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU Lesser General Public License as
+ *     published by the Free Software Foundation, either version 3 of
+ *     the License, or (at your option) any later version.
+ *
+ *     tuOCCI is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU Lesser General Public License for more details.
+ *
+ *     You should have received a copy of the GNU Lesser General Public
+ *     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
 package de.irf.it.tuocci.core;
 
 import de.irf.it.tuocci.model.Queryable;
@@ -672,45 +689,16 @@ public abstract class Entity
         return result;
     }
 
-    /**
-     * Triggers the action identified by the provided term/scheme combination,
-     * using the provided attribute values as arguments to it.
-     * <p/>
-     * More specifically, this method searches both the entity instance and all
-     * currently attached mixins for a method with an {@link
-     * de.irf.it.tuocci.model.annotations.Action} annotation
-     * of {@link de.irf.it.tuocci.model.annotations.Category} identified by the
-     * term/scheme combination as
-     * provided
-     * and, if found, invokes this method with the attribute values as its
-     * arguments.
-     *
-     * @param term
-     *         The <i>term</i> part identifying the <code>Action</code> to be
-     *         triggered.
-     * @param scheme
-     *         The <i>scheme</i> part identifying the <code>Action</code> to be
-     *         triggered.
-     * @param attributes
-     *         A map of attribute <i>name</i>s and values for the triggering of
-     *         the requested action, as denoted in the action definition.
-     * @throws ActionTriggerException
-     *         if the underlying method for the requested action could not be
-     *         found, invoked, a signature match is detected, or the underlying
-     *         mechanisms of the invocation fail.
-     * @throws AttributeAccessException
-     *         if an attribute cannot be found on this method, or underlying
-     *         creation of the corresponding instance failed.
-     */
-    public final void triggerAction(String term, String scheme, Map<String, String> attributes)
-            throws ActionTriggerException, AttributeAccessException {
+    @Override
+    public final void triggerAction(Element action, Map<de.irf.it.tuocci.model.representation.Attribute, String> attributes)
+            throws ActionTriggerException {
         Method method = null;
         Object target = null;
 
         /*
          * Search for method corresponding to provided term/scheme values.
          */
-        method = this.findMethodForAction(this, term, scheme);
+        method = this.findMethodForAction(this, action.getCategory().getTerm(), action.getCategory().getScheme().toString());
         if (method != null) {
             /*
              * Found on entity.
@@ -719,7 +707,7 @@ public abstract class Entity
         } // if
         else {
             for (Object o : this.mixins) {
-                method = this.findMethodForAction(o, term, scheme);
+                method = this.findMethodForAction(o, action.getCategory().getTerm(), action.getCategory().getScheme().toString());
                 if (method != null) {
                     /*
                      * Found on mixin.
@@ -746,14 +734,14 @@ public abstract class Entity
                         Object o = this.instanceFromString(pt, attributes.get(a.name()));
                         if (o == null) {
                             String message = new StringBuffer("invocation of '")
-                                    .append(scheme).append(term)
+                                    .append(action.getCategory().getScheme().toString()).append(action.getCategory().getTerm())
                                     .append("' with attribute '")
                                     .append(a.name())
                                     .append("' failed: no single argument constructor, 'fromString', or 'valueOf' method for conversion to ")
                                     .append(pt)
                                     .append(" found")
                                     .toString();
-                            throw new AttributeAccessException(message);
+                            throw new ActionTriggerException(message);
                         } // if
                         else {
                             invocationArguments.add(o);
@@ -761,7 +749,7 @@ public abstract class Entity
                     } // if
                     else {
                         String message = new StringBuffer("triggering of action '")
-                                .append(scheme).append(term)
+                                .append(action.getCategory().getScheme().toString()).append(action.getCategory().getTerm())
                                 .append("' failed: provided attributes do not match action signature")
                                 .toString();
                         throw new ActionTriggerException(message);
@@ -777,25 +765,25 @@ public abstract class Entity
                 } // try
                 catch (IllegalAccessException e) {
                     String message = new StringBuffer("triggering of action '")
-                            .append(scheme).append(term)
+                            .append(action.getCategory().getScheme().toString()).append(action.getCategory().getTerm())
                             .append("' failed: method static, not public, or otherwise inaccessible")
                             .toString();
-                    throw new AttributeAccessException(message, e);
+                    throw new ActionTriggerException(message, e);
                 } // catch
                 catch (InvocationTargetException e) {
                     String message = new StringBuffer("modification of action '")
-                            .append(scheme).append(term)
+                            .append(action.getCategory().getScheme().toString()).append(action.getCategory().getTerm())
                             .append("' failed: underlying method raised an exception (")
                             .append(e.getMessage())
                             .append(")")
                             .toString();
-                    throw new AttributeAccessException(message, e);
+                    throw new ActionTriggerException(message, e);
                 } // catch
 
             } // if
             else {
                 String message = new StringBuffer("triggering of action '")
-                        .append(scheme).append(term)
+                        .append(action.getCategory().getScheme().toString()).append(action.getCategory().getTerm())
                         .append("' failed: number of attributes (providing ")
                         .append(attributes.size())
                         .append(") does not match action signature (requiring ")
@@ -807,11 +795,11 @@ public abstract class Entity
         } // if
         else {
             String message = new StringBuffer("triggering of action '")
-                    .append(scheme).append(term)
+                    .append(action.getCategory().getScheme().toString()).append(action.getCategory().getTerm())
                     .append("' failed: no corresponding method found on ")
                     .append(this.toString())
                     .toString();
-            throw new AttributeAccessException(message);
+            throw new ActionTriggerException(message);
         } // else
     }
 
