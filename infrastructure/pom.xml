@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!--
   ~ This file is part of tuOCCI.
   ~
@@ -25,24 +26,48 @@
     <!-- The Basics -->
     <groupId>de.irf.it.tuocci</groupId>
     <artifactId>tuocci-infrastructure</artifactId>
-    <version>0.4</version>
+    <version>0.5-SNAPSHOT</version>
 
     <parent>
         <groupId>de.irf.it.tuocci</groupId>
         <artifactId>tuocci</artifactId>
-        <version>0.4</version>
+        <version>0.5-SNAPSHOT</version>
     </parent>
 
     <dependencies>
         <dependency>
             <groupId>de.irf.it.tuocci</groupId>
             <artifactId>tuocci-core</artifactId>
-            <version>${project.version}</version>
+            <version>0.5-SNAPSHOT</version>
         </dependency>
     </dependencies>
 
     <!-- Build Settings -->
-    <!--build/-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Specification-Title>Open Cloud Computing Interface - Infrastructure</Specification-Title>
+                            <Specification-Version>1.1</Specification-Version>
+                            <Specification-Vendor>Open Grid Forum</Specification-Vendor>
+                        </manifestEntries>
+                        <manifestSections>
+                            <manifestSection>
+                                <name>de/irf/it/tuocci/infrastructure/</name>
+                                <manifestEntries>
+                                    <Sealed>true</Sealed>
+                              </manifestEntries>
+                            </manifestSection>
+                        </manifestSections>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <!-- More Project Information -->
     <name>tuOCCI Infrastructure Model Implementation</name>

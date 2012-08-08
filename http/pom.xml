@@ -16,8 +16,6 @@
   ~     License along with tuOCCI.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<!-- $Id$ -->
-
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -27,25 +25,25 @@
     <!-- The Basics -->
     <groupId>de.irf.it.tuocci</groupId>
     <artifactId>tuocci-httpng</artifactId>
-    <version>0.4</version>
+    <version>0.5-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <parent>
         <groupId>de.irf.it.tuocci</groupId>
         <artifactId>tuocci</artifactId>
-        <version>0.4</version>
+        <version>0.5-SNAPSHOT</version>
     </parent>
 
     <dependencies>
         <dependency>
             <groupId>de.irf.it.tuocci</groupId>
             <artifactId>tuocci-core</artifactId>
-            <version>${project.version}</version>
+            <version>0.5-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>de.irf.it.tuocci</groupId>
             <artifactId>tuocci-infrastructure</artifactId>
-            <version>${project.version}</version>
+            <version>0.5-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -81,6 +79,27 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Specification-Title>Open Cloud Computing Interface - RESTful HTTP Rendering</Specification-Title>
+                            <Specification-Version>1.1</Specification-Version>
+                            <Specification-Vendor>Open Grid Forum</Specification-Vendor>
+                        </manifestEntries>
+                        <manifestSections>
+                            <manifestSection>
+                                <name>de/irf/it/tuocci/httpng/</name>
+                                <manifestEntries>
+                                    <Sealed>true</Sealed>
+                              </manifestEntries>
+                            </manifestSection>
+                        </manifestSections>
+                    </archive>
+                </configuration>
             </plugin>
         </plugins>
     </build>

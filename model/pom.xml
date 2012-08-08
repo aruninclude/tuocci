@@ -25,12 +25,12 @@
 
     <groupId>de.irf.it.tuocci</groupId>
     <artifactId>tuocci-model</artifactId>
-    <version>0.4</version>
+    <version>0.5-SNAPSHOT</version>
 
     <parent>
         <artifactId>tuocci</artifactId>
         <groupId>de.irf.it.tuocci</groupId>
-        <version>0.4</version>
+        <version>0.5-SNAPSHOT</version>
     </parent>
 
     <dependencies>
@@ -59,6 +59,31 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <compilerArgument>-proc:none</compilerArgument>
+                    <excludes>
+                        <exclude>**/de/irf/it/tuocci/model/introspection/*</exclude>
+                        <exclude>**/de/irf/it/tuocci/model/support/*</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Specification-Title>Open Cloud Computing Interface - Core (Model Part)</Specification-Title>
+                            <Specification-Version>1.1</Specification-Version>
+                            <Specification-Vendor>Open Grid Forum</Specification-Vendor>
+                        </manifestEntries>
+                        <manifestSections>
+                            <manifestSection>
+                                <name>de/irf/it/tuocci/model/</name>
+                                <manifestEntries>
+                                    <Sealed>true</Sealed>
+                              </manifestEntries>
+                            </manifestSection>
+                        </manifestSections>
+                    </archive>
                 </configuration>
             </plugin>
         </plugins>

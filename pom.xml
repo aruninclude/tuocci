@@ -26,15 +26,21 @@
     <!-- The Basics -->
     <groupId>de.irf.it.tuocci</groupId>
     <artifactId>tuocci</artifactId>
-    <version>0.4</version>
+    <version>0.5-SNAPSHOT</version>
     <packaging>pom</packaging>
+
+    <parent>
+        <groupId>org.sonatype.oss</groupId>
+        <artifactId>oss-parent</artifactId>
+        <version>7</version>
+    </parent>
 
     <properties>
         <tuocci.java.version>1.6</tuocci.java.version>
         <tuocci.aspectj.version>1.6.12</tuocci.aspectj.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
-    
+
     <dependencies>
     </dependencies>
 
@@ -73,6 +79,27 @@
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>2.3.1</version>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <addDefaultImplementationEntries>true
+                                </addDefaultImplementationEntries>
+                            </manifest>
+                        </archive>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-gpg-plugin</artifactId>
+                    <version>1.4</version>
+                    <configuration>
+                        <useAgent>true</useAgent>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-site-plugin</artifactId>
                     <version>3.1</version>
                     <configuration>
@@ -96,7 +123,13 @@
 
     <!-- More Project Information -->
     <name>tuOCCI Open Cloud Computing Interface Framework</name>
-    <description>The tuOCCI Open Cloud Computing Interface Framework is a 100% Java™ implementation of the Open Cloud Computing Interface (OCCI) family of specifications. More specifically, it provides a full implementation of the OCCI Core (GFD.183), OCCI Infrastructure (GFD.184), and OCCI RESTful HTTP Rendering (GFD.185) specifications, and passes the doyouspeakOCCI compliance tests.</description>
+    <description>The tuOCCI Open Cloud Computing Interface Framework is a 100%
+        Java™ implementation of the Open Cloud Computing Interface (OCCI) family
+        of specifications. More specifically, it provides a full implementation
+        of the OCCI Core (GFD.183), OCCI Infrastructure (GFD.184), and OCCI
+        RESTful HTTP Rendering (GFD.185) specifications, and passes the
+        doyouspeakOCCI compliance tests.
+    </description>
     <url>http://irf.github.com/tuocci</url>
     <inceptionYear>2011</inceptionYear>
     <licenses>
@@ -165,7 +198,7 @@
     <scm>
         <url>http://irf.github.com/tuocci</url>
         <connection>scm:git:git@github.com:irf/tuocci.git</connection>
-        <developerConnection>git@github.com:irf/tuocci.git</developerConnection>
+        <developerConnection>scm:git:git@github.com:irf/tuocci.git</developerConnection>
     </scm>
-    
+
 </project>
